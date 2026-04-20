@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const db = require('../config/db');
 const logger = require('../utils/logger');
+const upload = require('../utils/multer');
 
 const router = express.Router();
 
@@ -103,14 +104,17 @@ router.get('/category/:categoryId', async (req, res) => {
 });
 
 // Add new product
-router.post('/', async (req, res) => {
-    const { productName, productPrice, productImage, productCategoryId } = req.body;
+router.post('/', upload.single('productImage'), async (req, res) => {
+    const { productName, productPrice, productCategoryId } = req.body;
     const productId = uuidv4();
+
+    // Use uploaded file path or provided URL
+    const productImagePath = req.file ? `uploads/${req.file.filename}` : (req.body.productImage || '');
 
     try {
         await db.execute(
             'INSERT INTO products (productId, productName, productPrice, productImage, productCategoryId) VALUES (?, ?, ?, ?, ?)',
-            [productId, productName, productPrice, productImage, productCategoryId]
+            [productId, productName, productPrice, productImagePath, productCategoryId]
         );
         logger.info(`Product added successfully: ${productName} (${productId})`);
         res.status(201).json({ message: 'Product added successfully', productId });
@@ -121,12 +125,19 @@ router.post('/', async (req, res) => {
 });
 
 // Update product
-router.put('/:id', async (req, res) => {
-    const { productName, productPrice, productImage, productCategoryId } = req.body;
+router.put('/:id', upload.single('productImage'), async (req, res) => {
+    const { productName, productPrice, productCategoryId } = req.body;
+
+    // Keep old image or use new one
+    let productImagePath = req.body.productImage;
+    if (req.file) {
+        productImagePath = `uploads/${req.file.filename}`;
+    }
+
     try {
         await db.execute(
             'UPDATE products SET productName = ?, productPrice = ?, productImage = ?, productCategoryId = ? WHERE productId = ?',
-            [productName, productPrice, productImage, productCategoryId, req.params.id]
+            [productName, productPrice, productImagePath, productCategoryId, req.params.id]
         );
         logger.info(`Product updated successfully: ${req.params.id}`);
         res.json({ message: 'Product updated successfully' });
