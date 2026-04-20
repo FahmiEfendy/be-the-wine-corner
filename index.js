@@ -1,4 +1,5 @@
 const cors = require('cors');
+const path = require('path');
 const morgan = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -18,6 +19,8 @@ app.use(cors());
 app.use(morgan(process.env.MORGAN_ENVIRONMENT || 'dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
 app.use('/api/auth', authRoutes);

@@ -6,11 +6,13 @@ const logger = require('../utils/logger');
 
 const router = express.Router();
 
-// Get all products with filtering and sorting
+// Get all products with filtering, sorting, and pagination
 router.get('/', async (req, res) => {
-    const { search, categoryId, sortBy, order } = req.query;
+    const { search, categoryId, sortBy, order, page = 1, limit = 9, seed } = req.query;
 
+    const offset = (page - 1) * limit;
     let query = 'SELECT * FROM products';
+    let countQuery = 'SELECT COUNT(*) as total FROM products';
     let queryParams = [];
     let whereClauses = [];
 
@@ -25,20 +27,46 @@ router.get('/', async (req, res) => {
     }
 
     if (whereClauses.length > 0) {
-        query += ' WHERE ' + whereClauses.join(' AND ');
+        const whereString = ' WHERE ' + whereClauses.join(' AND ');
+        query += whereString;
+        countQuery += whereString;
     }
 
-    // Sorting
-    const validSortFields = ['productName', 'productPrice', 'createdAt'];
-    const sortField = validSortFields.includes(sortBy) ? sortBy : 'productName';
-    const sortOrder = order && order.toLowerCase() === 'desc' ? 'DESC' : 'ASC';
+    // Handle seeded random sorting
+    if (sortBy === 'random' && seed) {
+        // In MySQL, RAND(seed) provides a deterministic random sequence
+        query += ` ORDER BY RAND(${db.escape(seed)})`;
+    } else if (sortBy) {
+        const validSortFields = ['productName', 'productPrice', 'createdAt'];
+        const sortField = validSortFields.includes(sortBy) ? sortBy : 'createdAt';
+        const sortOrder = order && order.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
+        query += ` ORDER BY ${sortField} ${sortOrder}, productId ASC`;
+    } else {
+        query += ' ORDER BY productName ASC, productId ASC';
+    }
 
-    query += ` ORDER BY ${sortField} ${sortOrder}`;
+    // Pagination
+    query += ' LIMIT ? OFFSET ?';
+    const paginatedParams = [...queryParams, parseInt(limit), parseInt(offset)];
 
     try {
-        const [rows] = await db.execute(query, queryParams);
-        logger.info(`Products fetched successfully with filters: ${JSON.stringify(req.query)}`);
-        res.json(rows);
+        const [rows] = await db.execute(query, paginatedParams);
+        const [countResult] = await db.execute(countQuery, queryParams);
+
+        const total = countResult[0].total;
+        const lastPage = Math.ceil(total / limit);
+
+        logger.info(`Products fetched successfully. Total: ${total}, Page: ${page}`);
+
+        res.json({
+            data: rows,
+            pagination: {
+                total,
+                page: parseInt(page),
+                limit: parseInt(limit),
+                lastPage
+            }
+        });
     } catch (error) {
         logger.error(`Error fetching products: ${error.message}`);
         res.status(500).json({ error: error.message });

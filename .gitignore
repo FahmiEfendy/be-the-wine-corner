@@ -84,3 +84,6 @@ dist
 
 # Cache
 .npm-cache/
+
+# Asset
+uploads/
