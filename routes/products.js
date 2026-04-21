@@ -10,7 +10,7 @@ const router = express.Router();
 
 // Get all products with filtering, sorting, and pagination
 router.get('/', async (req, res) => {
-    const { search, categoryId, sortBy, order, page = 1, limit = 9, seed } = req.query;
+    const { search, categoryId, sortBy, order, page = 1, limit = 9, seed, minPrice, maxPrice } = req.query;
 
     const offset = (page - 1) * limit;
     let query = 'SELECT * FROM products';
@@ -27,6 +27,14 @@ router.get('/', async (req, res) => {
         whereClauses.push('productCategoryId = ?');
         queryParams.push(categoryId);
     }
+    if (minPrice) {
+        whereClauses.push('productPrice >= ?');
+        queryParams.push(parseInt(minPrice));
+    }
+    if (maxPrice) {
+        whereClauses.push('productPrice <= ?');
+        queryParams.push(parseInt(maxPrice));
+    }
 
     if (whereClauses.length > 0) {
         const whereString = ' WHERE ' + whereClauses.join(' AND ');
@@ -39,7 +47,7 @@ router.get('/', async (req, res) => {
         // In MySQL, RAND(seed) provides a deterministic random sequence
         query += ` ORDER BY RAND(${db.escape(seed)})`;
     } else if (sortBy) {
-        const validSortFields = ['productName', 'productPrice', 'createdAt'];
+        const validSortFields = ['productName', 'productPrice', 'createdAt', 'view_count'];
         const sortField = validSortFields.includes(sortBy) ? sortBy : 'createdAt';
         const sortOrder = order && order.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
         query += ` ORDER BY ${sortField} ${sortOrder}, productId ASC`;
@@ -168,6 +176,23 @@ router.delete('/:id', verifyToken, async (req, res) => {
         res.json({ message: 'Product deleted successfully' });
     } catch (error) {
         logger.error(`Error deleting product ${req.params.id}: ${error.message}`);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Increment view count
+router.patch('/:id/view', async (req, res) => {
+    try {
+        const [rows] = await db.execute('SELECT productId FROM products WHERE productId = ?', [req.params.id]);
+        if (rows.length === 0) {
+            logger.error(`Delete failed: Product not found: ${req.params.id}`);
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        await db.execute('UPDATE products SET view_count = view_count + 1 WHERE productId = ?', [req.params.id]);
+        res.json({ message: 'View count updated' });
+    } catch (error) {
+        logger.error(`Error updating view count ${req.params.id}: ${error.message}`);
         res.status(500).json({ error: error.message });
     }
 });

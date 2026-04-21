@@ -38,6 +38,7 @@ async function initializeDatabase() {
                 productPrice BIGINT NOT NULL,
                 productImage TEXT,
                 productCategoryId VARCHAR(36),
+                view_count INT DEFAULT 0,
                 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (productCategoryId) REFERENCES categories(productCategoryId) ON DELETE SET NULL
