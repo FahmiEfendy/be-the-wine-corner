@@ -23,6 +23,7 @@ async function initializeDatabase() {
                 productCategoryId VARCHAR(36) PRIMARY KEY,
                 productPath VARCHAR(255),
                 productType VARCHAR(255),
+                image_path TEXT,
                 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )

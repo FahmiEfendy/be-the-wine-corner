@@ -2,8 +2,10 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
+
 const db = require('../config/db');
 const logger = require('../utils/logger');
+const verifyToken = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -69,6 +71,12 @@ router.post('/login', async (req, res) => {
         logger.error(`Login error for user ${username}: ${error.message}`);
         res.status(500).json({ error: error.message });
     }
+});
+
+
+// Verify Token
+router.get('/verify', verifyToken, (req, res) => {
+    res.json({ valid: true, user: req.user });
 });
 
 module.exports = router;

@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../config/db');
 const logger = require('../utils/logger');
 const upload = require('../utils/multer');
+const verifyToken = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -104,7 +105,7 @@ router.get('/category/:categoryId', async (req, res) => {
 });
 
 // Add new product
-router.post('/', upload.single('productImage'), async (req, res) => {
+router.post('/', verifyToken, upload.single('productImage'), async (req, res) => {
     const { productName, productPrice, productCategoryId } = req.body;
     const productId = uuidv4();
 
@@ -125,7 +126,7 @@ router.post('/', upload.single('productImage'), async (req, res) => {
 });
 
 // Update product
-router.put('/:id', upload.single('productImage'), async (req, res) => {
+router.put('/:id', verifyToken, upload.single('productImage'), async (req, res) => {
     const { productName, productPrice, productCategoryId } = req.body;
 
     // Keep old image or use new one
@@ -135,6 +136,12 @@ router.put('/:id', upload.single('productImage'), async (req, res) => {
     }
 
     try {
+        const [rows] = await db.execute('SELECT productId FROM products WHERE productId = ?', [req.params.id]);
+        if (rows.length === 0) {
+            logger.error(`Update failed: Product not found: ${req.params.id}`);
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
         await db.execute(
             'UPDATE products SET productName = ?, productPrice = ?, productImage = ?, productCategoryId = ? WHERE productId = ?',
             [productName, productPrice, productImagePath, productCategoryId, req.params.id]
@@ -148,8 +155,14 @@ router.put('/:id', upload.single('productImage'), async (req, res) => {
 });
 
 // Delete product
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken, async (req, res) => {
     try {
+        const [rows] = await db.execute('SELECT productId FROM products WHERE productId = ?', [req.params.id]);
+        if (rows.length === 0) {
+            logger.error(`Delete failed: Product not found: ${req.params.id}`);
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
         await db.execute('DELETE FROM products WHERE productId = ?', [req.params.id]);
         logger.info(`Product deleted successfully: ${req.params.id}`);
         res.json({ message: 'Product deleted successfully' });
