@@ -47,7 +47,7 @@ router.get('/', async (req, res) => {
         // In MySQL, RAND(seed) provides a deterministic random sequence
         query += ` ORDER BY RAND(${db.escape(seed)})`;
     } else if (sortBy) {
-        const validSortFields = ['productName', 'productPrice', 'createdAt', 'view_count'];
+        const validSortFields = ['productName', 'productPrice', 'createdAt', 'view_count', 'whatsapp_clicks', 'blibli_clicks', 'tokopedia_clicks'];
         const sortField = validSortFields.includes(sortBy) ? sortBy : 'createdAt';
         const sortOrder = order && order.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
         query += ` ORDER BY ${sortField} ${sortOrder}, productId ASC`;
@@ -193,6 +193,31 @@ router.patch('/:id/view', async (req, res) => {
         res.json({ message: 'View count updated' });
     } catch (error) {
         logger.error(`Error updating view count ${req.params.id}: ${error.message}`);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Increment click counts for marketplace/whatsapp
+router.patch('/:id/click/:type', async (req, res) => {
+    const { type } = req.params;
+    const allowedTypes = ['whatsapp', 'blibli', 'tokopedia'];
+    
+    if (!allowedTypes.includes(type)) {
+        return res.status(400).json({ error: 'Invalid click type' });
+    }
+
+    const columnName = `${type}_clicks`;
+
+    try {
+        const [rows] = await db.execute('SELECT productId FROM products WHERE productId = ?', [req.params.id]);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        await db.execute(`UPDATE products SET ${columnName} = ${columnName} + 1 WHERE productId = ?`, [req.params.id]);
+        res.json({ message: `${type} click updated` });
+    } catch (error) {
+        logger.error(`Error updating ${type} clicks for ${req.params.id}: ${error.message}`);
         res.status(500).json({ error: error.message });
     }
 });

@@ -62,6 +62,9 @@ async function initializeDatabase() {
                 productImage TEXT,
                 productCategoryId VARCHAR(36),
                 view_count INT DEFAULT 0,
+                whatsapp_clicks INT DEFAULT 0,
+                blibli_clicks INT DEFAULT 0,
+                tokopedia_clicks INT DEFAULT 0,
                 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (productCategoryId) REFERENCES categories(productCategoryId) ON DELETE SET NULL
