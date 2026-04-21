@@ -469,6 +469,61 @@
               ],
               "cookie": [],
               "body": "[\n    {\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"productPath\": \"/red-wine\",\n        \"productType\": \"Red Wine\"\n    },\n    {\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"productPath\": \"/white-wine\",\n        \"productType\": \"White Wine\"\n    },\n    {\n        \"productCategoryId\": \"c4263fff-455b-466c-b328-1909f05ee727\",\n        \"productPath\": \"/rose-wine\",\n        \"productType\": \"Rose Wine\"\n    },\n    {\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"productPath\": \"/sparkling-wine\",\n        \"productType\": \"Sparkling Wine\"\n    },\n    {\n        \"productCategoryId\": \"e3e13e21-1eaf-4414-9477-36cbff4a6961\",\n        \"productPath\": \"/gin\",\n        \"productType\": \"Gin\"\n    },\n    {\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"productPath\": \"/whisky\",\n        \"productType\": \"Whisky\"\n    },\n    {\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"productPath\": \"/soju\",\n        \"productType\": \"Soju\"\n    },\n    {\n        \"productCategoryId\": \"h32819ae-4c8d-4569-bac1-66755977b83d\",\n        \"productPath\": \"/sake\",\n        \"productType\": \"Sake\"\n    },\n    {\n        \"productCategoryId\": \"i647e112-7699-4696-ad01-cba2fde1f03b\",\n        \"productPath\": \"/beer\",\n        \"productType\": \"Beer\"\n    },\n    {\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"productPath\": \"/other\",\n        \"productType\": \"Other\"\n    }\n]"
+            },
+            {
+              "name": "404 - No categories found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/categories",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "categories"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "33"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"21-FczKlowKPmGZldvH1i7g8Pn4AKU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 09:35:31 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"No categories found\"\n}"
             }
           ]
         },
@@ -624,6 +679,134 @@
               ],
               "cookie": [],
               "body": "{\n    \"message\": \"No token provided, authorization denied\"\n}"
+            },
+            {
+              "name": "400 - A category with the name {category_name} already exists.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"productType\": \"Test\",\n    \"productPath\": \"/test\" \n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/categories",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "categories"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "63"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3f-Mh0q9XwFfiqqLa4GFJtlXrdWqTs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 09:46:47 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"A category with the name \\\"Test\\\" already exists.\"\n}"
+            },
+            {
+              "name": "400 - A category with the path {category_path} already exists.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"productType\": \"Red Wine\",\n    \"productPath\": \"/test\" \n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/categories",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "categories"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "64"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"40-CxVWPCuDjjciR7kn1VitDBzlrDQ\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 09:49:05 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"A category with the path \\\"/test\\\" already exists.\"\n}"
             }
           ]
         },
@@ -719,6 +902,201 @@
               "body": "{\n    \"message\": \"Category updated successfully\"\n}"
             },
             {
+              "name": "400 - Category not found",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"productPath\": \"/test\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/categories/b65a593d-c58e-4e27-84ed-cc1e10f70a45",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "categories",
+                    "b65a593d-c58e-4e27-84ed-cc1e10f70a45"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "32"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"20-UIf8FxlyOJoAChyWA7ngWtBn3+o\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 09:53:51 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Category not found\"\n}"
+            },
+            {
+              "name": "400 - Another category already uses the path {category_path}.",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"productPath\": \"/red-wine\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/categories/b1b4235e-5a28-46d6-8300-aaad8be186c0",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "categories",
+                    "b1b4235e-5a28-46d6-8300-aaad8be186c0"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "67"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"43-FRqm/gTujPOz0NX4ps8yi0re1xc\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 09:55:07 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Another category already uses the path \\\"/red-wine\\\".\"\n}"
+            },
+            {
+              "name": "400 - Another category already uses the name {category_type}.",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"productType\": \"Red Wine\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/categories/b1b4235e-5a28-46d6-8300-aaad8be186c0",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "categories",
+                    "b1b4235e-5a28-46d6-8300-aaad8be186c0"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "66"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"42-3kGBtBa51R/r9YNsSLSprzjPGEI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 09:55:55 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Another category already uses the name \\\"Red Wine\\\".\"\n}"
+            },
+            {
               "name": "401 - No token provided, authorization denied",
               "originalRequest": {
                 "method": "PATCH",
@@ -800,7 +1178,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"productType\": \"Test\",\n    \"productPath\": \"/test\" \n}"
+              "raw": ""
             },
             "url": {
               "raw": "{{BASE_URL}}/products",
@@ -938,6 +1316,109 @@
               ],
               "cookie": [],
               "body": "[\n    {\n        \"productId\": \"a6a6801b-dd00-4c0a-9f07-dc126e5a5647\",\n        \"productName\": \"1502 Davinci Rocca di Cesena Sangiovese 2018 Italy\",\n        \"productPrice\": 400000,\n        \"productImage\": \"uploads/images/43f2f1c8-a4f9-443e-9f62-cedfe0a9e206.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"617ead5c-1b93-429f-888a-d7e2d82a60bb\",\n        \"productName\": \"1924 Bourbon Barrel Aged Cabernet Sauvignon \",\n        \"productPrice\": 575000,\n        \"productImage\": \"uploads/images/95dcd4b5-dcd9-4331-a0cf-796be8e9d114.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"34e6689a-35b4-4074-9923-1c92228e7665\",\n        \"productName\": \"20 x Jinro Chamisul Same Flavour\",\n        \"productPrice\": 1960000,\n        \"productImage\": \"uploads/images/78f01ace-a56a-4c68-ab4b-67fd4bfa25c1.png\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"3c393728-6848-4b6e-9a7a-aedb05250713\",\n        \"productName\": \"30 Mile Cabernet Sauvignon \",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/e12cacca-09d1-492d-a780-8909e8d3274a.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"ded85934-0208-4843-8cca-101cc9edf827\",\n        \"productName\": \"30 Mile Chardonnay Australia White Wine\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/d5741282-f004-440f-b25d-586e5fcaa546.webp\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"82531e65-4aec-4ceb-aaf5-713546771580\",\n        \"productName\": \"30 Mile Sauvignon Blanc\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/caa59db8-ca0e-4ffc-86f4-76a906f1b473.webp\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"7b5e149c-3c09-4b3e-bcdc-6c9aba272757\",\n        \"productName\": \"30 Mile Shiraz \",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/aa14cd56-4ced-45f5-92c0-b418c3bfbee2.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"eafd1d4d-01d1-4a21-a2ec-0e5fa036f91c\",\n        \"productName\": \"Absolut Blue Vodka\",\n        \"productPrice\": 740000,\n        \"productImage\": \"uploads/images/042ccd70-9cca-4138-bebf-f92e8664dab8.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"75e7db38-25e5-48a0-a464-aa93e86243b8\",\n        \"productName\": \"Absolut Vodka Miniature Set 5\",\n        \"productPrice\": 725000,\n        \"productImage\": \"uploads/images/82982357-a1ea-41dd-ba15-589f07dcc098.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"b3c772d3-18c8-48cb-a615-8079414066b5\",\n        \"productName\": \"Akashi Red Japanese Blended Whisky 500ml\",\n        \"productPrice\": 550000,\n        \"productImage\": \"uploads/images/29d47d5f-e4d1-4058-9b25-985f112f9308.png\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"fae74f48-e244-42c3-9066-8bec7bd24d4b\",\n        \"productName\": \"Alamos Malbec Argentina\",\n        \"productPrice\": 405000,\n        \"productImage\": \"uploads/images/add91edc-cefa-4295-8a76-e8f24ce3699f.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"692a56c1-a5a2-489b-85cd-eda15a9a4c5a\",\n        \"productName\": \"Antigal Estimulo Cabernet Sauvignon\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/27836ff1-0ee4-41a5-8fd5-b5133561cf6f.png\",\n        \"productCategoryId\": \"a6a6801b-dd00-4c0a-9f07-dc126e5a5647\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"49bf6bfe-634f-421f-a398-24909b6ed9c1\",\n        \"productName\": \"Antigal Estimulo Cabernet Sauvignon\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/9350b43c-2eaf-438c-9330-1d9f7b7df257.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"284c336b-62e3-42b4-bf57-b368991a9112\",\n        \"productName\": \"Apothic Dark Red Wine\",\n        \"productPrice\": 455000,\n        \"productImage\": \"uploads/images/10a5ccf1-728d-4f9d-957d-91625f8bf52b.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"478b1f92-60fc-4efa-bdca-b42e762c564e\",\n        \"productName\": \"Apothic Red Wine\",\n        \"productPrice\": 455000,\n        \"productImage\": \"uploads/images/88fc01a9-766d-4641-99db-b30279e7cb4e.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f84a1406-e8c5-42f7-81ea-6a5b35258a02\",\n        \"productName\": \"Auchentoshan 12 Years Old Single Malt Scotch Whisky\",\n        \"productPrice\": 890000,\n        \"productImage\": \"uploads/images/b738d236-30b0-4da2-bcad-8580fa5d74da.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0822f357-f805-412b-847e-29299002ef3a\",\n        \"productName\": \"B&G Barton & Guestier Cuvee Special Sweet Wine\",\n        \"productPrice\": 275000,\n        \"productImage\": \"uploads/images/3cd2e803-5e06-44f8-aea8-150d6d13a793.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"deeaf91b-fd15-441b-ae23-1d103827e49f\",\n        \"productName\": \"Bacardi Carta Blanca White Rum\",\n        \"productPrice\": 365000,\n        \"productImage\": \"uploads/images/3191af2c-54fb-4bff-8e6c-709ccbabc9d4.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"605ac8e1-0df2-43d7-8992-3cd0d36d8541\",\n        \"productName\": \"Baileys Original Irish Cream\",\n        \"productPrice\": 675000,\n        \"productImage\": \"uploads/images/f2c27096-1b04-4362-a9d6-2b02c9c77f28.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"98055a98-3833-40e2-9711-92e0953dcebf\",\n        \"productName\": \"Balbi Soprani Asti Dolce Italy\",\n        \"productPrice\": 480000,\n        \"productImage\": \"uploads/images/c1ae892a-a6ba-4db6-9315-ad3ef72be466.png\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"26873504-1398-4951-8cfe-43d601d4b072\",\n        \"productName\": \"Balbi Soprani Moscato D'asti \",\n        \"productPrice\": 400000,\n        \"productImage\": \"uploads/images/c90ac449-f027-4789-bd61-8c474600f167.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f9afcf02-f966-41ca-ba86-4fcddb5db460\",\n        \"productName\": \"Balvenie 12 Years Double Wood\",\n        \"productPrice\": 1980000,\n        \"productImage\": \"uploads/images/6f043016-559d-4b38-94c3-c0b27763ea64.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"787a0f86-25db-4fab-90d8-d670973a0015\",\n        \"productName\": \"Balvenie 14 Years Caribbean Cask\",\n        \"productPrice\": 2400000,\n        \"productImage\": \"uploads/images/4a8cf77e-fbe8-488e-bb74-b86d587f46b4.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"af98b896-10e8-4efb-a6fa-72033ecb1c1a\",\n        \"productName\": \"Balvenie 16 years Triple Cask\",\n        \"productPrice\": 4700000,\n        \"productImage\": \"uploads/images/6f278a9f-aeff-41d6-ac67-e969560b1294.png\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"4e3e7fbb-7c6a-4a6a-829e-9a6298bc5e13\",\n        \"productName\": \"Barton & Guestier sweet red\",\n        \"productPrice\": 275000,\n        \"productImage\": \"uploads/images/6d5f25bb-8d84-4076-979a-211a280fcb03.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"494e74eb-4c34-4393-a23a-6b27a7cc176b\",\n        \"productName\": \"Bell's Whisky \",\n        \"productPrice\": 415000,\n        \"productImage\": \"uploads/images/5bf97cf7-ef2e-44d5-96d7-5bb15cdfae15.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"5c823d83-6e3a-43c1-be8c-a2fc5c39ace9\",\n        \"productName\": \"Benedicte Dom\",\n        \"productPrice\": 1095000,\n        \"productImage\": \"uploads/images/8ed48920-0cc3-44d8-97f9-f75a721f159a.png\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"b9f7dfec-610d-43b4-9e44-3b7d30d865b6\",\n        \"productName\": \"Black Douglas Single Grain Scotch Whisky 40%\",\n        \"productPrice\": 450000,\n        \"productImage\": \"uploads/images/38484358-7e61-430c-ae18-0f3b89304f88.png\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"3ef59617-52f7-4000-83ee-ad54d7917448\",\n        \"productName\": \"Blue Eyed Boy Shiraz Australia\",\n        \"productPrice\": 1550000,\n        \"productImage\": \"uploads/images/571eceab-0504-4941-bef7-e848af0665c6.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0d3ff3ae-7c43-481b-9712-97e23b01e5eb\",\n        \"productName\": \"Bombay Saphire Gin\",\n        \"productPrice\": 840000,\n        \"productImage\": \"uploads/images/5c10a337-8c24-4c5d-9f5d-45a4121b6eac.jpeg\",\n        \"productCategoryId\": \"e3e13e21-1eaf-4414-9477-36cbff4a6961\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"6be0b5f7-d239-4b34-a0e6-5e1c461d3d41\",\n        \"productName\": \"Born Gold Muroka Junmai Daiginjo 720ml \",\n        \"productPrice\": 770000,\n        \"productImage\": \"uploads/images/a1111cb6-dff7-440a-91e2-e10a4d1b81eb.jpeg\",\n        \"productCategoryId\": \"h32819ae-4c8d-4569-bac1-66755977b83d\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"236d81e3-88e8-44c5-bbf7-b6aca8b7cba0\",\n        \"productName\": \"Bottega Fragolino Rosso\",\n        \"productPrice\": 400000,\n        \"productImage\": \"uploads/images/920c336f-4e35-4419-9e01-ef789cca16a2.jpeg\",\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f2255224-01a9-4bc8-b593-f02be7789f23\",\n        \"productName\": \"Bottega Petalo Amore Moscato\",\n        \"productPrice\": 425000,\n        \"productImage\": \"uploads/images/19df13fe-be95-4e47-be61-4a12cad91773.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"8ef0541c-b2c5-46e3-a4ac-993cf1cd4abd\",\n        \"productName\": \"Bottega Prosecco Brut\",\n        \"productPrice\": 460000,\n        \"productImage\": \"uploads/images/7ff98aab-e86d-484e-a1d9-034e03bc4d7a.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"7a992502-bf1d-4be7-9cae-fad4336b3d83\",\n        \"productName\": \"Bottega Prosecco Gold DOCG\",\n        \"productPrice\": 665000,\n        \"productImage\": \"uploads/images/ab80b6b1-47bf-4ef1-8cad-6d0ce2f24a4e.jpeg\",\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"c539b242-2b9f-4da9-be8f-6b5e1f50b1e1\",\n        \"productName\": \"Budweiser Glass Bottle 330ml\",\n        \"productPrice\": 55000,\n        \"productImage\": \"uploads/images/7d3f005f-c5f6-46ae-8fc9-fd5814c4842b.jpeg\",\n        \"productCategoryId\": \"i647e112-7699-4696-ad01-cba2fde1f03b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"86b78725-62c0-44c5-80e4-45bc6b26408f\",\n        \"productName\": \"Bulldog Gin United Kingdom 750ml\",\n        \"productPrice\": 870000,\n        \"productImage\": \"uploads/images/5e0192fa-0de5-4a44-930b-0adc401db132.webp\",\n        \"productCategoryId\": \"e3e13e21-1eaf-4414-9477-36cbff4a6961\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"83d77995-323b-43b4-ad4a-aa16967ac9a0\",\n        \"productName\": \"Cape Discovery Delicioso Port Wine\",\n        \"productPrice\": 285000,\n        \"productImage\": \"uploads/images/ad7114af-d329-44db-a9d3-50cb0aa61713.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f1bef235-5f1a-4ced-9437-61a2e9f26ec1\",\n        \"productName\": \"Captain Morgan Spiced Gold 750ml\",\n        \"productPrice\": 350000,\n        \"productImage\": \"uploads/images/aa0138e8-e70c-4ef2-b6d9-9006111b899e.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"29c5b0fe-c7e6-4788-8780-9a70f17aeb0f\",\n        \"productName\": \"Captain Morgan White Rum\",\n        \"productPrice\": 350000,\n        \"productImage\": \"uploads/images/542f17d6-6dc1-490a-8110-f64ba4457920.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"59c64d1a-2788-4aec-9fd2-cbe5419a4904\",\n        \"productName\": \"Carlo Rossi California Red\",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/e91dfb6c-3183-4960-a872-21cc36b4d12a.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"feb53639-c2a9-4b81-8923-c89c254bc735\",\n        \"productName\": \"Carlo Rossi Sweet Red\",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/0a3d9d40-4abc-4614-8d29-2587f03076cf.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"4a94cdd2-b335-4a1f-98e5-a6ce561be678\",\n        \"productName\": \"Chabot Extra Armagnac 700ml\",\n        \"productPrice\": 4500000,\n        \"productImage\": \"uploads/images/ddc2ebdc-e010-4460-a2e6-81fbe263e891.png\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"53db518f-77be-4487-8272-c667f5b3c053\",\n        \"productName\": \"Chandon Brut Australia \",\n        \"productPrice\": 750000,\n        \"productImage\": \"uploads/images/15ce2fa8-e36e-4177-a727-fa7386a95f54.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f59e96cf-9d63-487c-95db-a70bf79e2dc8\",\n        \"productName\": \"Chateau De La Negly la Falaise Rouge 2018 Red Wine France 15.5% alc\",\n        \"productPrice\": 785000,\n        \"productImage\": \"uploads/images/e37ca154-fc59-497d-b1f2-bcee0226599a.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"9608cdd2-987e-4c1f-b076-edb6e7c56245\",\n        \"productName\": \"Chateau De La Negly la Falaise Rouge 2018 Red Wine France 15.5% alc\",\n        \"productPrice\": 785000,\n        \"productImage\": \"uploads/images/d1cce7d8-c125-4008-a3af-14134790ef2a.png\",\n        \"productCategoryId\": \"a6a6801b-dd00-4c0a-9f07-dc126e5a5647\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"1facfe4e-7459-4909-a9a8-18462e7f9b0f\",\n        \"productName\": \"Chateau Malmaison 2016\",\n        \"productPrice\": 875000,\n        \"productImage\": \"uploads/images/dd6fab3d-a246-4e25-ac52-8b56bac157ac.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"1a11f360-8619-4202-87e1-947470a76f0a\",\n        \"productName\": \"Chateau Saint Romans 2018 Bordeaux France Red Wine 14% alc 750ml\",\n        \"productPrice\": 350000,\n        \"productImage\": \"uploads/images/a734d4bb-bf69-4743-b7f8-f312249f0a64.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"3b5d53ad-ce84-49dd-b691-bf56d63b1f8b\",\n        \"productName\": \"Chateau Saint Romans 2018 Bordeaux France Red Wine 14% alc 750ml\",\n        \"productPrice\": 350000,\n        \"productImage\": \"uploads/images/ad68dc51-2750-4bf8-b991-cc822c7a54c0.png\",\n        \"productCategoryId\": \"a6a6801b-dd00-4c0a-9f07-dc126e5a5647\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"95f386bf-da47-4a5a-b786-a992254e3990\",\n        \"productName\": \"Chivas Regal 12 Years Old\",\n        \"productPrice\": 1000000,\n        \"productImage\": \"uploads/images/ea127ca1-48e7-4fad-ab0e-e41327a04d1b.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"12534885-326d-4d84-97f2-e8efd88a885b\",\n        \"productName\": \"Choya Genshu\",\n        \"productPrice\": 695000,\n        \"productImage\": \"uploads/images/d4faa882-fad6-4d25-8fc5-475d6c1297a8.png\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f1c0bd7b-d6cd-4f7c-83e1-77a6beb4bb34\",\n        \"productName\": \"Choya Honey\",\n        \"productPrice\": 615000,\n        \"productImage\": \"uploads/images/71118bc9-eb74-495c-863e-dde18c15407f.png\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"db9683b8-3eb3-4ed9-820d-cf85483d7054\",\n        \"productName\": \"Choya Shiso\",\n        \"productPrice\": 615000,\n        \"productImage\": \"uploads/images/13ca7a62-fecc-4fac-a0a9-8d9ac87696de.png\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"54b5989a-a990-4a34-a49c-6d611999232d\",\n        \"productName\": \"Choya Uji Green Tea\",\n        \"productPrice\": 620000,\n        \"productImage\": \"uploads/images/03e800fd-f88f-4f15-9514-e58515b1a359.png\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"576f4856-4569-48f3-8127-b9f398580dad\",\n        \"productName\": \"Choya Umeshu Single Year 325ml \",\n        \"productPrice\": 380000,\n        \"productImage\": \"uploads/images/e84e4820-f571-4dc7-9522-c039029be0f2.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"e4c98f5e-842f-4c89-8238-70086642bfe5\",\n        \"productName\": \"Choya Umeshu Single Year 650ml\",\n        \"productPrice\": 750000,\n        \"productImage\": \"uploads/images/a845aa59-663c-439c-950b-316b63675ac2.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"8f9047aa-f592-40ba-97a8-ab2ba7d54432\",\n        \"productName\": \"Chum Churum Apple\",\n        \"productPrice\": 100000,\n        \"productImage\": \"uploads/images/c4418be6-f05a-4c98-a340-b51170c56235.png\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"82b92167-3ff2-4168-8551-4ecc64fcd1c7\",\n        \"productName\": \"Chum Churum Apple Blueberry\",\n        \"productPrice\": 100000,\n        \"productImage\": \"uploads/images/f8b25069-d003-458d-9df4-d9934d1f5081.png\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"3607d5d3-0536-4a5b-912b-117b8210b153\",\n        \"productName\": \"Chum Churum Apple Mango\",\n        \"productPrice\": 100000,\n        \"productImage\": \"uploads/images/76fb121e-9922-49bd-bdac-851006038c4a.png\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"e7adbeb5-92b2-4b64-bd38-1b9ac6acdcca\",\n        \"productName\": \"Chum Churum Apple Original\",\n        \"productPrice\": 100000,\n        \"productImage\": \"uploads/images/c09c956e-565b-4b5e-9de6-6fa28d5af1ce.jpeg\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"dcc22e73-ef6f-47c3-b008-e2df9bd37cd8\",\n        \"productName\": \"Chum Churum Apple Peach\",\n        \"productPrice\": 100000,\n        \"productImage\": \"uploads/images/5d05c241-dc2e-48e7-b070-641615918cd3.png\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0a7f3f67-4227-4c4d-8d30-ab16217edb54\",\n        \"productName\": \"Chum Churum Apple Yoghurt\",\n        \"productPrice\": 100000,\n        \"productImage\": \"uploads/images/258e9c58-8f24-4492-b9bb-932e7e5b481c.jpeg\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"cbcd5f35-6e80-4a24-be13-0416744a53be\",\n        \"productName\": \"Cincoro Reposado Tequila\",\n        \"productPrice\": 3750000,\n        \"productImage\": \"uploads/images/0533f8f3-1874-4612-a39f-3a74bedbcb4f.png\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"18775507-f538-49c3-8102-655ae3262ba4\",\n        \"productName\": \"Clarendelle Rouge 2015 Bordeaux Red Wine France\",\n        \"productPrice\": 635000,\n        \"productImage\": \"uploads/images/1cdeeb07-8a7c-405f-96a2-8ff7e02e6ad8.jpeg\",\n        \"productCategoryId\": \"a6a6801b-dd00-4c0a-9f07-dc126e5a5647\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"3a43081d-6f8b-4d40-9924-f15e9f7aab48\",\n        \"productName\": \"Clarendelle Rouge 2015 Bordeaux Red Wine France\",\n        \"productPrice\": 660000,\n        \"productImage\": \"uploads/images/235c8807-1d3e-49ed-979e-a53298c5c4ae.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"8ece468b-bd7f-448b-a157-559c1718be1f\",\n        \"productName\": \"Clase Azul Reposado 750ml Tequila \",\n        \"productPrice\": 5400000,\n        \"productImage\": \"uploads/images/9321d14e-0133-46fd-806c-1d4a6da3391b.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"1fa6cc28-53a1-49c3-961c-a450e02c4f0b\",\n        \"productName\": \"Cockburn's Fine Ruby\",\n        \"productPrice\": 600000,\n        \"productImage\": \"uploads/images/76e6059a-ad34-4f60-a98a-f9083ed7de4b.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"82acf52f-6a65-4f7a-80f2-b86bbfa43d3e\",\n        \"productName\": \"Cockburn's Fine Tawny\",\n        \"productPrice\": 600000,\n        \"productImage\": \"uploads/images/4b888564-ab9b-4993-85f6-f16e49cec67a.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"cade2a76-f6db-46b6-8edd-393948bc772a\",\n        \"productName\": \"Cockburn's Special Reserve \",\n        \"productPrice\": 700000,\n        \"productImage\": \"uploads/images/0f9e52b0-4959-4ba9-b16d-b63175b3617f.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f4666ee1-62b4-4d60-92bf-a007cec2a2e9\",\n        \"productName\": \"Codigo 1530 Reposado Tequila\",\n        \"productPrice\": 1500000,\n        \"productImage\": \"uploads/images/e417041d-b642-427d-a5f0-6bddeb7ee0f7.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"31a8f816-f4f5-40b9-a02a-809206af6e1c\",\n        \"productName\": \"Cointreau \",\n        \"productPrice\": 760000,\n        \"productImage\": \"uploads/images/580c8263-bdbe-4dea-8f78-0812b7c494e1.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"bfef1138-4906-489c-9420-a0ead277be60\",\n        \"productName\": \"Collezione 50 Vino Rosso \",\n        \"productPrice\": 800000,\n        \"productImage\": \"uploads/images/198cd4bc-13fd-4c7e-a8b6-d79969bbc3f0.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a9cc3481-ff1a-46ca-8777-b3b929c1556d\",\n        \"productName\": \"Corona Beer Mexico 355ml\",\n        \"productPrice\": 60000,\n        \"productImage\": \"uploads/images/13ea4b42-4149-4ea6-b8f9-4d060b0e082e.jpeg\",\n        \"productCategoryId\": \"i647e112-7699-4696-ad01-cba2fde1f03b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"74abf31e-c7e2-4c57-8520-9dd1c2bcf4aa\",\n        \"productName\": \"D'Alamel Reserva Cabernet Merlot 2018 Chile\",\n        \"productPrice\": 400000,\n        \"productImage\": \"uploads/images/09689579-e077-4018-88d0-23a142c06c59.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"6c80804b-3659-403e-992b-62a5fc9a988d\",\n        \"productName\": \"D'Alamel Reserva Cabernet Sauvignon 2018 Chile\",\n        \"productPrice\": 400000,\n        \"productImage\": \"uploads/images/9c05e5a5-2729-4c3b-b9f3-77e0c93e442d.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"6791b6d0-a0d4-44e5-a07d-60c52ea9dfff\",\n        \"productName\": \"Dassai 23 Junmai Daiginjo 720ml\",\n        \"productPrice\": 2220000,\n        \"productImage\": \"uploads/images/d2fc2aa6-8d20-4e40-a58d-d3b66bbdc87f.png\",\n        \"productCategoryId\": \"h32819ae-4c8d-4569-bac1-66755977b83d\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"5699b684-189c-4529-9a15-ebc807c081be\",\n        \"productName\": \"Dassai 39 720ml\",\n        \"productPrice\": 1350000,\n        \"productImage\": \"uploads/images/e293197a-0ab9-4b1e-8d8b-5c8373336c15.jpeg\",\n        \"productCategoryId\": \"h32819ae-4c8d-4569-bac1-66755977b83d\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"bb7dfbee-4555-4ea4-ae6b-12f2f3aee9d1\",\n        \"productName\": \"Dassai 45 720ml\",\n        \"productPrice\": 955000,\n        \"productImage\": \"uploads/images/3e1e2cf5-94e0-4f0c-8607-99c0f2cb98d7.jpeg\",\n        \"productCategoryId\": \"h32819ae-4c8d-4569-bac1-66755977b83d\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"ad193603-dccd-49ad-ae47-0e237f42c6e3\",\n        \"productName\": \"De Bortoli Accomplice Sweet Red \",\n        \"productPrice\": 290000,\n        \"productImage\": \"uploads/images/1e010033-6165-499c-9f99-8d793965184a.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"1cce544c-3dc4-4904-895f-8cf76fe48bf7\",\n        \"productName\": \"De Bortoli Family Selection Reserve Tawny\",\n        \"productPrice\": 380000,\n        \"productImage\": \"uploads/images/a21a1f5b-53cf-4f2b-9915-7488f40293e7.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"8351b50f-48d6-4200-b34f-6d405e267e7c\",\n        \"productName\": \"De Bortoli Sparkling Brut White Wine\",\n        \"productPrice\": 345000,\n        \"productImage\": \"uploads/images/1059fb95-9aef-47e3-8ba7-62ca315c6b15.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f1c7eb3f-6283-4a4a-939d-c82b465c92af\",\n        \"productName\": \"Decoy Cabernet Sauvignon \",\n        \"productPrice\": 750000,\n        \"productImage\": \"uploads/images/2cee86cc-ecdb-45cb-b98e-bab37a108d01.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"7200ec6f-6df9-4ab9-b764-4af97fe52fcf\",\n        \"productName\": \"Decoy Merlot \",\n        \"productPrice\": 750000,\n        \"productImage\": \"uploads/images/e74b301b-746b-49c4-89b3-7e553c8118a6.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"da39c2ed-245e-4813-9fac-2e83270d07b7\",\n        \"productName\": \"Decoy Pinot Noir\",\n        \"productPrice\": 750000,\n        \"productImage\": \"uploads/images/61e336fa-3a50-46f5-a132-b2bc21763ce9.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0314050e-3959-4600-8b19-ce0ac1c47066\",\n        \"productName\": \"Diplomatico Exclusive Reserva Rum\",\n        \"productPrice\": 1250000,\n        \"productImage\": \"uploads/images/7966be24-b358-48d3-b3e9-a27cd3af4cfa.png\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"1238c009-bd6e-4dae-85e4-2ca1ada87341\",\n        \"productName\": \"Drostdy Hoff Natural Sweet Red\",\n        \"productPrice\": 270000,\n        \"productImage\": \"uploads/images/baf0adbd-7ed6-4dff-a473-fc5cb9a7f198.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a4ea8525-5f8c-45c1-986e-3b6a0077b920\",\n        \"productName\": \"Envynol Merlot 2017 France\",\n        \"productPrice\": 380000,\n        \"productImage\": \"uploads/images/5a48e1c4-04c8-4623-8ba0-fb0ab26ea392.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"bc939e8b-892e-4c4e-a8d3-b9bd12636aa7\",\n        \"productName\": \"F Negroamaro Salento Italy Red Wine\",\n        \"productPrice\": 960000,\n        \"productImage\": \"uploads/images/46a35b40-e4b5-4a4b-a703-7d927bb76fce.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"722f3fcf-2ca9-4988-862a-571ca7ad714c\",\n        \"productName\": \"Farnese Edizione Cinque Autoctoni Italy Red Wine \",\n        \"productPrice\": 960000,\n        \"productImage\": \"uploads/images/bfbff331-7836-4953-b63f-51fffc440cb0.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"2ee61cd3-7faf-475c-9829-96778f0a13c0\",\n        \"productName\": \"Fetzer Pinot Noir\",\n        \"productPrice\": 400000,\n        \"productImage\": \"uploads/images/6d3dc1c1-c55e-49c9-889b-8c7fb478a9b9.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f3c4c663-a0a7-4573-a31d-45b5209f155f\",\n        \"productName\": \"Fetzer Zinfandel\",\n        \"productPrice\": 400000,\n        \"productImage\": \"uploads/images/f472438c-8173-4250-8ff0-8b3076088d37.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"2fa2045e-e779-4ab4-b330-bd27b25c4273\",\n        \"productName\": \"Fireball Cinnamon Whisky\",\n        \"productPrice\": 500000,\n        \"productImage\": \"uploads/images/a53978e9-c887-4988-9bec-ef93d0de7e87.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"51f6efc3-df71-49f9-9282-f8f1047ed070\",\n        \"productName\": \"Freakshow Cabernet Sauvignon 2017 United States America\",\n        \"productPrice\": 850000,\n        \"productImage\": \"uploads/images/9967defa-49f2-4e98-af6b-22e79fc61f8d.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"750f97b6-a581-4c3b-80cf-56786886e08e\",\n        \"productName\": \"Freixenet Carta Nevada demi sec Spain\",\n        \"productPrice\": 460000,\n        \"productImage\": \"uploads/images/64ceae6f-39ca-44e8-9b63-19a822248e45.png\",\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"e5b3e822-fb77-4d24-a49c-61c7bc1101b5\",\n        \"productName\": \"Freixenet Ice Semi Seco Spain\",\n        \"productPrice\": 530000,\n        \"productImage\": \"uploads/images/de82e530-5855-475b-aba6-7e7c0aaa7a7b.jpeg\",\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"03e622d9-ebb4-4bf5-89c5-972279bc41a9\",\n        \"productName\": \"Freixenet Mia \",\n        \"productPrice\": 370000,\n        \"productImage\": \"uploads/images/d4ac660e-2375-4a94-8768-ba872966552e.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"fb4fde91-f5aa-4af6-bf06-67baa35295a2\",\n        \"productName\": \"Frontera Cabernet Sauvignon\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/c03613ba-f685-4418-9287-de0e3baad5c9.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f4b850f0-f606-416e-a1ac-a7831afea525\",\n        \"productName\": \"Frontera Chardonnay White Wine 2020 Chile\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/f822da2c-a961-48aa-bdd2-39815fc8a45b.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"fab4f7b8-f5b4-42f2-a530-13aeaa47a365\",\n        \"productName\": \"Frontera Late Harvest Sweet White Wine Chile\",\n        \"productPrice\": 395000,\n        \"productImage\": \"uploads/images/1f0fd780-298d-4b38-9b58-2decdcd85859.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"41c83cd3-8ac3-4c0a-bbe3-66c7ce8375f8\",\n        \"productName\": \"Frontera Merlot Red Wine 2019 Chile\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/d2f5f2ad-f655-4aaf-a7df-dfbf9403019e.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"4d8f84af-a875-40ee-a8fb-b5ffb4e77b54\",\n        \"productName\": \"Frontera Sauvignon Blanc\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/5c9a24e9-fce6-47f1-805d-dca97cf78364.png\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"69f7dfe2-90ed-4bdc-b12e-49736dd24039\",\n        \"productName\": \"Frontera Sweet Red\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/7ba29753-2125-4477-a4ca-29b5b566bf37.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"8a4be5f2-7eb0-4fb1-ad59-353d7f070634\",\n        \"productName\": \"Gibson's Pink Premium Gin\",\n        \"productPrice\": 380000,\n        \"productImage\": \"uploads/images/1f01b6fc-9405-469b-9328-e7c927f15316.jpeg\",\n        \"productCategoryId\": \"e3e13e21-1eaf-4414-9477-36cbff4a6961\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"c1ad13ca-f729-4b15-8619-dce3f71e7d0c\",\n        \"productName\": \"Glaetzer Anaperenna 2017 Australia\",\n        \"productPrice\": 1600000,\n        \"productImage\": \"uploads/images/363ab0e6-c721-4d05-9480-bce06d3747fc.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"7de96fa8-d174-4894-97f2-995f8288eca5\",\n        \"productName\": \"Glenfiddich 12 Years Old Single Malt Whisky \",\n        \"productPrice\": 1350000,\n        \"productImage\": \"uploads/images/199d0513-9de3-43b9-bf09-3dca2034bfb0.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f531c7c3-2650-4c30-ac08-b06385120fdd\",\n        \"productName\": \"Glenfiddich 15 Years Old Single Malt Whisky \",\n        \"productPrice\": 1490000,\n        \"productImage\": \"uploads/images/efdfdc42-e7a7-4e67-8f45-6e1603950908.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"6542ffc1-1645-4206-932b-548e50899850\",\n        \"productName\": \"Glenfiddich 18 years\",\n        \"productPrice\": 2050000,\n        \"productImage\": \"uploads/images/65fb617f-2314-4a6c-bc27-0bd0702f82c4.png\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"c9cede72-1ef8-4aa1-af7b-a29fa74508cb\",\n        \"productName\": \"Glenfiddich 700ml 15 Year Old include 1pcs 200ml Glenfiddich Flask Bottle\",\n        \"productPrice\": 1850000,\n        \"productImage\": \"uploads/images/efed0df7-330b-4458-8b60-2d742d009b65.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"cd326592-37c6-49c2-a570-e1fb8aeea163\",\n        \"productName\": \"Gordon's Dry Gin\",\n        \"productPrice\": 365000,\n        \"productImage\": \"uploads/images/12afadac-08b1-4b7e-bc13-48a36db68222.jpeg\",\n        \"productCategoryId\": \"e3e13e21-1eaf-4414-9477-36cbff4a6961\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"c42c15d6-3051-4fb4-a919-c62209a66817\",\n        \"productName\": \"Gordon's Pink Gin\",\n        \"productPrice\": 420000,\n        \"productImage\": \"uploads/images/eaecd439-1149-4bb3-997f-929cd73225b1.jpeg\",\n        \"productCategoryId\": \"e3e13e21-1eaf-4414-9477-36cbff4a6961\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"76e03d74-54aa-4536-9b1b-cbada27773cf\",\n        \"productName\": \"Grey Goose Vodka 750ml\",\n        \"productPrice\": 900000,\n        \"productImage\": \"uploads/images/2d4e623f-fcf2-4869-84f1-fef05c8a73fe.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"4d3979f5-9713-4910-9e26-a4a94823d7f4\",\n        \"productName\": \"Hatten Aga Red\",\n        \"productPrice\": 215000,\n        \"productImage\": \"uploads/images/64cbeb86-ac25-4b4c-8b8f-c3810d71d54b.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"15ade6ca-a577-4fa8-a69c-819a5ea42433\",\n        \"productName\": \"Hatten Aga Rose \",\n        \"productPrice\": 210000,\n        \"productImage\": \"uploads/images/d9ea7c8e-1240-495c-abfa-08779295971f.jpeg\",\n        \"productCategoryId\": \"c4263fff-455b-466c-b328-1909f05ee727\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"7c8c66d4-841a-40a7-a6b7-342167212056\",\n        \"productName\": \"Hatten Pino De Bali\",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/3921b079-3ebf-47b8-a84c-1b09ccddb005.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"ffe3e381-b6e6-4496-ae6f-251161248fdc\",\n        \"productName\": \"Hatten Sweet Alexandria \",\n        \"productPrice\": 215000,\n        \"productImage\": \"uploads/images/80622b1a-bc7b-44d4-a28e-84e732a0448c.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"ee2081ef-d22d-4bb6-9dab-80f5619475bb\",\n        \"productName\": \"Hatten Sweet Syrah\",\n        \"productPrice\": 255000,\n        \"productImage\": \"uploads/images/9266295b-557f-49ff-a6b9-84c3b874798b.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"55f618f2-d256-494c-8d3d-be2ad55bdeee\",\n        \"productName\": \"Heineken Beer\",\n        \"productPrice\": 40000,\n        \"productImage\": \"uploads/images/494611be-ece6-4a2c-86a8-6634fdc1b62f.jpeg\",\n        \"productCategoryId\": \"i647e112-7699-4696-ad01-cba2fde1f03b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"acf82135-4ef3-4ed0-8e59-d82f4a299a21\",\n        \"productName\": \"Hendrick's Gin\",\n        \"productPrice\": 1150000,\n        \"productImage\": \"uploads/images/168108b4-2dfc-4b45-96b0-f50aab2c0643.jpeg\",\n        \"productCategoryId\": \"e3e13e21-1eaf-4414-9477-36cbff4a6961\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f6f56a5c-5db2-4c89-a561-ae43b20e4caa\",\n        \"productName\": \"Hennessy VSOP\",\n        \"productPrice\": 2050000,\n        \"productImage\": \"uploads/images/1e5b954c-e3fa-41a5-b2fb-5f7c8364ea9a.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f289f3a3-b285-4d6c-94bf-01ec8c3a45da\",\n        \"productName\": \"Hennessy XO \",\n        \"productPrice\": 6300000,\n        \"productImage\": \"uploads/images/b15b96d5-1251-4f1c-89c4-0f6c62e6fa9c.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"b6cb5370-da53-4f38-9fec-11fedfbb6dce\",\n        \"productName\": \"I Muri Negroamaro Puglia\",\n        \"productPrice\": 385000,\n        \"productImage\": \"uploads/images/3c7be3f6-cf88-4203-8ae7-31404da7acc8.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"49a477f8-699d-4b55-a6d4-df2a21f053fe\",\n        \"productName\": \"I Muri Primitivo Puglia\",\n        \"productPrice\": 385000,\n        \"productImage\": \"uploads/images/8838843f-9bfe-42f0-8cb2-af1245294ffc.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0d64edd4-07cb-49c2-afd0-ea47690c8ca0\",\n        \"productName\": \"Jack Daniel's Old No. 7\",\n        \"productPrice\": 875000,\n        \"productImage\": \"uploads/images/6f7d91be-d775-40ea-b23c-78212605a0f1.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"181d9511-4a14-4e53-a4e7-d3474539c1d3\",\n        \"productName\": \"Jack Daniel's Tennessee Honey\",\n        \"productPrice\": 875000,\n        \"productImage\": \"uploads/images/e25bad4f-2854-4e0a-8d0b-4ae8c79e42db.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"ce987495-9fb1-473f-b3c9-a04e742ee733\",\n        \"productName\": \"Jacob's Creek Merlot\",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/92f1b6ee-4381-4f69-ac91-3a931517f324.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"98ef961f-389c-4a4e-acdc-3d1b1518b07c\",\n        \"productName\": \"Jacob's Creek Shiraz Cabernet \",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/5ea07535-86af-4d09-8968-232f9c546a30.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a64cb6c4-9f57-4c70-b2a6-3c2e6b598d39\",\n        \"productName\": \"Jagermeister \",\n        \"productPrice\": 630000,\n        \"productImage\": \"uploads/images/ba359b13-f036-4b6c-a014-756b9ad14afc.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a31efe1d-57b9-406f-9940-4bf41b7842bb\",\n        \"productName\": \"Jameson Irish Whiskey\",\n        \"productPrice\": 850000,\n        \"productImage\": \"uploads/images/6039bb8f-3f18-43b8-b6b3-cde20a1fe798.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"88d7e35c-e437-4055-9aa6-2bcff2ee316c\",\n        \"productName\": \"Jim Beam 1set Gift Box, 2 glass free\",\n        \"productPrice\": 1000000,\n        \"productImage\": \"uploads/images/b0202946-3f49-401c-8b62-3999734db330.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"abbca7dd-6681-457c-a52d-b2fb69d6e035\",\n        \"productName\": \"Jim Beam Apple \",\n        \"productPrice\": 500000,\n        \"productImage\": \"uploads/images/51b00878-561e-4914-b6c7-00ca205a6e40.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"953ef5aa-9fa3-4069-a765-27412cd55d23\",\n        \"productName\": \"Jim Beam Black Cherry\",\n        \"productPrice\": 500000,\n        \"productImage\": \"uploads/images/deaec679-ff62-423f-9108-0a7cec0f8c50.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f305aed1-7f25-44dd-9266-d9c5a168921d\",\n        \"productName\": \"Jim Beam White Bourbon\",\n        \"productPrice\": 700000,\n        \"productImage\": \"uploads/images/983d8304-6599-4925-830c-3b25533495ba.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"3fd45040-3bda-476c-93ad-42052c37063a\",\n        \"productName\": \"Jinro Chamisul Fresh / Original \",\n        \"productPrice\": 105000,\n        \"productImage\": \"uploads/images/94d94596-8aa0-4d1e-a40c-53b69767cbb5.jpeg\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"b29f7ceb-0fe0-4920-b111-19309ad47a95\",\n        \"productName\": \"Jinro Chamisul Grape Fruit\",\n        \"productPrice\": 105000,\n        \"productImage\": \"uploads/images/5adb6c6e-180a-4bb0-a086-06138d0fedff.webp\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"42017041-d0f3-4376-b143-5ffe5f416775\",\n        \"productName\": \"Jinro Chamisul Green Grape\",\n        \"productPrice\": 105000,\n        \"productImage\": \"uploads/images/a9660435-8280-4a6f-8f37-4e7113f65996.webp\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"9b8fa62d-b1a3-49db-82d7-7f65127249ee\",\n        \"productName\": \"Jinro Chamisul Plum\",\n        \"productPrice\": 105000,\n        \"productImage\": \"uploads/images/10625e92-7287-48c6-a179-8e9ca38b3bdf.webp\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"ff86eba7-88d9-453e-93e7-b1a0596d8fbb\",\n        \"productName\": \"Jinro Chamisul Strawberry\",\n        \"productPrice\": 105000,\n        \"productImage\": \"uploads/images/8358935c-030c-4117-b0fe-5758acc7fdc4.jpeg\",\n        \"productCategoryId\": \"g964dacf-af82-45e9-9aae-f92b5357f162\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"d8bf289e-f6e4-4cce-a323-d8fcc7ab7b16\",\n        \"productName\": \"Johnnie Walker Black Label\",\n        \"productPrice\": 1050000,\n        \"productImage\": \"uploads/images/297e71bc-9597-4269-93e0-721cf1d060e8.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"009ff199-18ce-4dfd-b9ff-3cf4b868f058\",\n        \"productName\": \"Johnnie Walker Blonde\",\n        \"productPrice\": 900000,\n        \"productImage\": \"uploads/images/ca89d9cd-1686-4820-b826-3057c5783bbb.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"ed5229c4-fa1c-4221-a518-abf36f4a82c4\",\n        \"productName\": \"Johnnie Walker Blue Label\",\n        \"productPrice\": 4150000,\n        \"productImage\": \"uploads/images/cf2e6d6c-0d58-4f84-b3af-e71bde761c38.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"d5a0bada-1fac-4517-a0fe-67dbcdaa65f7\",\n        \"productName\": \"Johnnie Walker Gold Label \",\n        \"productPrice\": 1500000,\n        \"productImage\": \"uploads/images/172bf638-f039-4691-abc3-a21ebbd11646.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"8393c256-7e89-447b-8df0-b9d8a08950ed\",\n        \"productName\": \"Johnnie Walker Miniature Set\",\n        \"productPrice\": 1400000,\n        \"productImage\": \"uploads/images/f132d0b9-b3d1-4bed-8ab7-5315518afcd8.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a6626c23-6afc-4ea2-929c-5e3bc9577cf7\",\n        \"productName\": \"Johnnie Walker Miniature Set 4 (Double Black & Gold Label)\",\n        \"productPrice\": 600000,\n        \"productImage\": \"uploads/images/cf66fdde-72cd-4f23-958e-94cd3c247b93.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"160277e8-3805-4992-ade4-a9264fdd65e6\",\n        \"productName\": \"Johnnie Walker Red Label\",\n        \"productPrice\": 600000,\n        \"productImage\": \"uploads/images/5536375b-ebdb-46d3-b9ba-84885b0eb58a.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"155af1a9-09c8-4bfc-bfb3-29d1e7b57a18\",\n        \"productName\": \"Johnny Q Cabernet Sauvignon \",\n        \"productPrice\": 385000,\n        \"productImage\": \"uploads/images/3b85c4fb-d324-4659-9597-74a14c3efcb7.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"11a4d2e4-94bc-4643-9d8e-f769d57cdd72\",\n        \"productName\": \"Johnny Q Shiraz\",\n        \"productPrice\": 385000,\n        \"productImage\": \"uploads/images/000b4a15-5b6a-4479-b718-629b65d0bf69.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"b8a63a22-3996-42c9-8485-4213b5efd79e\",\n        \"productName\": \"Jose Cuervo Especial Reposado Tequila\",\n        \"productPrice\": 770000,\n        \"productImage\": \"uploads/images/83a1f129-ad56-4f95-b8f1-4099386bb09e.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"153ea241-72f6-4b36-aa2a-cde40e962be3\",\n        \"productName\": \"Kahlua Coffee Liqueur \",\n        \"productPrice\": 725000,\n        \"productImage\": \"uploads/images/6c307782-31b4-423e-b355-ca17c950fd3a.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"58893268-6400-4286-af34-256ec5861643\",\n        \"productName\": \"Kaiken Cabernet Sauvignon\",\n        \"productPrice\": 420000,\n        \"productImage\": \"uploads/images/83817d0c-c2f4-4ea2-958a-8cf3919048ab.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"6782881d-b900-4528-94f7-9432ddb95c97\",\n        \"productName\": \"Kawa Kawa Anggur Hijau\",\n        \"productPrice\": 100000,\n        \"productImage\": \"uploads/images/8179a35b-e6b1-4442-95bc-ff1dce203f8b.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"714df197-542e-46d3-ad33-7ef23c7af904\",\n        \"productName\": \"Kawa Kawa Anggur Merah 600ml\",\n        \"productPrice\": 85000,\n        \"productImage\": \"uploads/images/b1248b55-9149-49f9-a673-034663ac8c1d.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f5073148-12eb-4f40-a258-73051c8cec46\",\n        \"productName\": \"Kooksoondang Banana\",\n        \"productPrice\": 110000,\n        \"productImage\": \"uploads/images/f168a066-1602-49aa-a380-ec5f0bdde48e.png\",\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"11897e26-39b4-4c73-8a8a-7e301e964cb8\",\n        \"productName\": \"kubota manjyu junmai daiginjo sake\",\n        \"productPrice\": 1800000,\n        \"productImage\": \"uploads/images/3163a53b-fa67-45d0-b4f6-e45f3220b48e.jpeg\",\n        \"productCategoryId\": \"h32819ae-4c8d-4569-bac1-66755977b83d\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"95c380e1-70ce-4974-bc72-61d954a0f2ad\",\n        \"productName\": \"kubota manjyu junmai daiginjo sake japan\",\n        \"productPrice\": 1800000,\n        \"productImage\": null,\n        \"productCategoryId\": \"h32819ae-4c8d-4569-bac1-66755977b83d\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"83e0959a-3d37-4b09-b520-10dce6dc9663\",\n        \"productName\": \"Lambrusco Academia\",\n        \"productPrice\": 330000,\n        \"productImage\": \"uploads/images/b645493d-8f3e-4534-bbe3-c42be4c9ead9.jpeg\",\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"570a7714-dbf9-41ed-93ee-8b0f8fb54d1f\",\n        \"productName\": \"Lambrusco Academia Italy Sweet & Sparkling\",\n        \"productPrice\": 330000,\n        \"productImage\": \"uploads/images/e3735aba-c5a3-4eb6-9a9c-242e99bcb869.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"3e275d58-a0dd-48e3-bfc8-c8be74d36792\",\n        \"productName\": \"Lambrusco Emilia Terre Frizzante\",\n        \"productPrice\": 330000,\n        \"productImage\": \"uploads/images/67866449-5005-46f3-85d9-77aee8e76a9f.jpeg\",\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"330e1885-0705-42f2-8c36-9632fa537ab6\",\n        \"productName\": \"Lambrusco Emilia Terre Frizzante Italy Sweet & Sparkling\",\n        \"productPrice\": 330000,\n        \"productImage\": \"uploads/images/c6e0799d-d695-4132-954c-1cc735634820.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"2ace07a7-1ba1-4943-9629-6f731cb9861c\",\n        \"productName\": \"Lambrusco Roccaforte \",\n        \"productPrice\": 270000,\n        \"productImage\": \"uploads/images/76fb69b1-78ba-49c6-8414-32409962f423.jpeg\",\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"4699fe4f-a9ce-449a-9535-2c7a7b97bd2f\",\n        \"productName\": \"Lambrusco Roccaforte Italy Sweet & Sparkling\",\n        \"productPrice\": 270000,\n        \"productImage\": \"uploads/images/f9bc75db-6448-4ce1-a99e-ec0714e95c77.webp\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"56dc69c3-8f2e-4704-ae29-c50503d8a642\",\n        \"productName\": \"Lambrusco Sababay \",\n        \"productPrice\": 280000,\n        \"productImage\": \"uploads/images/c0e0e289-e660-4eb1-9900-e5093311dcca.jpeg\",\n        \"productCategoryId\": \"d45dd4e3-23a1-4321-afbf-b630f0633af7\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"b4328b84-833b-4226-a3f6-d47aa8064e14\",\n        \"productName\": \"Lindeman 50 Shiraz Australia\",\n        \"productPrice\": 310000,\n        \"productImage\": \"uploads/images/12148384-de0c-4810-a531-cdd4412bfb50.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"bced67ae-ffd3-4fd4-a7bd-443153dc7b32\",\n        \"productName\": \"Lindeman's bin 40 Merlot\",\n        \"productPrice\": 310000,\n        \"productImage\": \"uploads/images/b0f8f267-f353-48ab-b00b-097d76d7d8ca.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"88e13e8a-f50d-4813-8cc2-0976cb50af45\",\n        \"productName\": \"Lindeman's bin 45 Cabernet Sauvignon \",\n        \"productPrice\": 310000,\n        \"productImage\": \"uploads/images/2a23db0f-8012-49d3-8b6b-c17ec08bc417.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f38bc1a8-f202-4009-8227-2ebd670fc280\",\n        \"productName\": \"Lindeman's bin 46 Sweet Red\",\n        \"productPrice\": 310000,\n        \"productImage\": \"uploads/images/ee3f7c07-9700-4b10-95f2-35e9f19f7e69.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"655d5947-7250-441a-8406-5662b23ecc10\",\n        \"productName\": \"Lindeman's Gentleman's Collection Cabernet Sauvignon No. 3\",\n        \"productPrice\": 600000,\n        \"productImage\": \"uploads/images/485136fb-3d3e-4391-a9b9-9bb73bc58c50.webp\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"4bc4ea65-be67-44b2-8a42-8c6e6aad9efc\",\n        \"productName\": \"Luis Felipe Cabernet Sauvignon 2021 Chille\",\n        \"productPrice\": 285000,\n        \"productImage\": \"uploads/images/dd760d12-68f5-4e8e-a8e1-cf01531f614d.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"3b57260c-a142-4c5d-a0b1-16d8e4cee3ff\",\n        \"productName\": \"Luis Felipe Classic Merlot 2021 Chille\",\n        \"productPrice\": 285000,\n        \"productImage\": \"uploads/images/67bd1cff-195c-473d-9cd5-20a0452d0dc0.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"7e025792-78a4-4bcc-a879-c8169ea20877\",\n        \"productName\": \"Luis Felipe Edwards Malbec\",\n        \"productPrice\": 285000,\n        \"productImage\": \"uploads/images/0d17eb1e-493f-43a6-9030-1ac0fe489070.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"8424a3c2-67c5-4ef9-846e-2aed9bde5061\",\n        \"productName\": \"Luzzatto Red Italy\",\n        \"productPrice\": 310000,\n        \"productImage\": \"uploads/images/8eda0a64-a3cc-42ae-9cba-b0a1ef206b45.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f79c1c60-51ff-45a8-82c3-776008eadaf2\",\n        \"productName\": \"Macallan 12 Sherry Oak Single Malt Schotchland Whisky\",\n        \"productPrice\": 3500000,\n        \"productImage\": \"uploads/images/27b754f2-bffb-4353-b588-e5d593b4c5a4.webp\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"968835d6-4696-45cf-9923-e03a0e1bd70e\",\n        \"productName\": \"Macallan 12 Years Double Cask Single Malt Scotchland Whisky\",\n        \"productPrice\": 3000000,\n        \"productImage\": \"uploads/images/6b3bcfd8-86b1-4ad5-b2ed-0dcb58d74ba4.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"012c714a-ea31-4fc8-ba2d-4c943428cc36\",\n        \"productName\": \"Maison Castel lce Cuvee Blance\",\n        \"productPrice\": 450000,\n        \"productImage\": \"uploads/images/9578af19-c140-4db5-8c1f-ed14c8ce8131.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"14acb4bb-1288-475a-aa21-bfc9d15c03a2\",\n        \"productName\": \"Martell VSOP Red Barrel\",\n        \"productPrice\": 1650000,\n        \"productImage\": \"uploads/images/2fa379b6-b976-44c6-bd60-3100026785b9.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"8cc1d93b-4b30-4b81-909b-f6ee9ebc6c88\",\n        \"productName\": \"Mascetti Sababay Port Style Bali\",\n        \"productPrice\": 390000,\n        \"productImage\": \"uploads/images/29c3160b-c5c1-42e5-b7e5-2dee253628c1.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"e7a3b68f-9aec-4d2e-899d-bafa40893048\",\n        \"productName\": \"Mateus Medium Sweet Rose\",\n        \"productPrice\": 430000,\n        \"productImage\": \"uploads/images/2a0a8b52-5423-4fa6-a7c9-40d7eccd4f9f.jpeg\",\n        \"productCategoryId\": \"c4263fff-455b-466c-b328-1909f05ee727\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"798d34ab-ddef-462f-8efa-285f778f97fa\",\n        \"productName\": \"Mateus Rose Original\",\n        \"productPrice\": 430000,\n        \"productImage\": \"uploads/images/0d02b176-91c1-4beb-a70e-2172a4643647.png\",\n        \"productCategoryId\": \"c4263fff-455b-466c-b328-1909f05ee727\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"2a01d746-32fd-48e7-8a71-9a054b6dbafd\",\n        \"productName\": \"Mi Terruno Reserve Cabernet Sauvignon \",\n        \"productPrice\": 430000,\n        \"productImage\": \"uploads/images/d9cc6b75-617b-47ad-8cac-c453e3234158.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"d44ba20b-abdc-4abf-a620-a59ea51669c0\",\n        \"productName\": \"Miraval Provence Rose France\",\n        \"productPrice\": 800000,\n        \"productImage\": \"uploads/images/270e20d6-737e-472b-8ffd-415acdd73b78.jpeg\",\n        \"productCategoryId\": \"c4263fff-455b-466c-b328-1909f05ee727\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"e76b3305-4240-4c2c-a93a-08d3db01b045\",\n        \"productName\": \"Mollydooker Maitre D Cabernet Sauvignon \",\n        \"productPrice\": 860000,\n        \"productImage\": \"uploads/images/d7cc5ee0-60de-43a4-8b4e-b20b02c748d7.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"1b3f68bc-6202-4f23-b1d5-cd1b452557ac\",\n        \"productName\": \"Mollydooker The Boxer Shiraz\",\n        \"productPrice\": 860000,\n        \"productImage\": \"uploads/images/992f32cf-72ed-41e4-a728-0c8402134e52.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"84ec2dbf-86ea-4a2f-aa7f-71bcce6a2a9b\",\n        \"productName\": \"Mollydooker Two Left Feet Shiraz Cabernet Merlot\",\n        \"productPrice\": 860000,\n        \"productImage\": \"uploads/images/883ff299-6ff4-4470-9177-48eec5bec508.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"6a582278-b595-4e19-b682-2ad496de884e\",\n        \"productName\": \"Monkey Shoulder \",\n        \"productPrice\": 1150000,\n        \"productImage\": \"uploads/images/51ee21a0-7759-43f1-941c-9d5c459af79f.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"2c56220c-364f-4b36-bf8e-f14f412be0d9\",\n        \"productName\": \"Montes Alpha Cabernet Sauvignon Chile\",\n        \"productPrice\": 590000,\n        \"productImage\": \"uploads/images/9375583f-727f-47dd-9538-3f16fe514a25.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"2057b36c-7aa3-4a5d-af87-dc6ece1dfe8a\",\n        \"productName\": \"Montes Alpha Chardonnay\",\n        \"productPrice\": 675000,\n        \"productImage\": \"uploads/images/0bfda210-e446-4bd5-9faf-ec75c64b9b59.webp\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"daabdf7b-0378-44a2-b28c-04eaf9b93490\",\n        \"productName\": \"Montes Alpha Merlot Chile\",\n        \"productPrice\": 675000,\n        \"productImage\": \"uploads/images/367906c7-5055-4246-8681-155a9bc416f7.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a37ceabd-5f05-4b4e-a4bf-9dfeefee20d6\",\n        \"productName\": \"Moscato De Bali Sababay\",\n        \"productPrice\": 280000,\n        \"productImage\": \"uploads/images/97d8e2f6-7da5-4834-b95c-93296f094939.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"4b08ca63-d82c-451b-a831-0e4da7b9e6d7\",\n        \"productName\": \"Moulin De Gassac Red France\",\n        \"productPrice\": 330000,\n        \"productImage\": \"uploads/images/657dfa58-c69f-42b0-b110-46b343b6bcfd.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"64548513-75a6-4704-bdaa-fd0d7552eb24\",\n        \"productName\": \"Nikka Whisky From The Barrel 500ml\",\n        \"productPrice\": 1250000,\n        \"productImage\": \"uploads/images/e20f8ab8-c33f-4745-b92d-af72e3fe8c4f.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"3d81614f-a878-4c93-b3b1-7a37b1729efd\",\n        \"productName\": \"Noblesse Cabernet Sauvignon \",\n        \"productPrice\": 248000,\n        \"productImage\": \"uploads/images/765ff73a-1617-4385-a088-fe238d97ce81.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"196f58df-0028-49d6-af80-a24460995f6e\",\n        \"productName\": \"Noblesse Merlot\",\n        \"productPrice\": 248000,\n        \"productImage\": \"uploads/images/03b331b5-b219-4f68-b0b7-a7fc44490016.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"514283a0-40b7-4d53-8e05-48614c5efad2\",\n        \"productName\": \"obikwa sweet red\",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/81f4eb5c-a245-4801-aadd-c23c191f1236.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"2a882237-4063-4047-a863-abd7c8273f91\",\n        \"productName\": \"Oggi Moscato Vino Frizzante\",\n        \"productPrice\": 375000,\n        \"productImage\": \"uploads/images/66aa93dc-b839-48c5-9892-71e062141711.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"470322d5-b974-40b1-82a4-67218e8e982c\",\n        \"productName\": \"Pauillac de Latour 2011 Red Wine 750ml\",\n        \"productPrice\": 2600000,\n        \"productImage\": \"uploads/images/7b2e00fd-0e84-48b2-b8f4-f0a3bdae190f.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"78f16a0a-930e-4b98-8d46-c5a2d2bb98f4\",\n        \"productName\": \"Pecha Kucha\",\n        \"productPrice\": 340000,\n        \"productImage\": \"uploads/images/3933afb7-2a1f-4dc3-9732-bf8664a0a39c.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"2e03c151-1779-4400-9805-758184bbcafa\",\n        \"productName\": \"Penfold 389 Cabernet Shiraz 2019 Australia free 1 electric wine opener\",\n        \"productPrice\": 1750000,\n        \"productImage\": \"uploads/images/a14c45ca-695d-424a-85e2-d5a2d04fa305.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f155704a-e7a9-4875-8926-d87f13d42b47\",\n        \"productName\": \"Plaga Cabernet Merlot\",\n        \"productPrice\": 235000,\n        \"productImage\": \"uploads/images/0956c060-dafa-45a8-8ad9-038c7baa28b3.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"631406dc-9c42-44c1-a6cf-6a7c1e9e1913\",\n        \"productName\": \"Plaga Cabernet Sauvignon \",\n        \"productPrice\": 235000,\n        \"productImage\": \"uploads/images/029a902e-2d37-49a8-b0f9-dd685b759560.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"6d3ab97f-4b55-4fc6-9899-59765be52593\",\n        \"productName\": \"Plaga Chardonnay \",\n        \"productPrice\": 235000,\n        \"productImage\": \"uploads/images/ee296460-7123-4bf8-a8b2-e3e4fbd83b4a.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"1437abf4-fafc-41b9-bf50-037851659f09\",\n        \"productName\": \"Plaga Sauvignon Blanc\",\n        \"productPrice\": 235000,\n        \"productImage\": \"uploads/images/c8e2038f-0801-4c1c-88ac-a93a3dd0d841.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0626b593-fc2b-401c-986a-61c648a3ca4b\",\n        \"productName\": \"Porto Cruz Special Reserve \",\n        \"productPrice\": 860000,\n        \"productImage\": \"uploads/images/15fea7e8-ac2a-4d9c-9620-d3e2c290e592.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"5de842aa-1df8-4bc1-bfaa-00a21fa50e36\",\n        \"productName\": \"Porto Cruz Tawny\",\n        \"productPrice\": 560000,\n        \"productImage\": \"uploads/images/29d21311-746b-4dfc-8c14-fcdbd20f4e31.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f6eb0e12-7068-4cf3-aac1-15b76e84390b\",\n        \"productName\": \"Roku Japanese Gin\",\n        \"productPrice\": 965000,\n        \"productImage\": \"uploads/images/17e592e0-ddd4-4bd6-aa84-bfee21f6b376.jpeg\",\n        \"productCategoryId\": \"e3e13e21-1eaf-4414-9477-36cbff4a6961\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"e9df961b-d22f-4354-8909-e3c2916a5897\",\n        \"productName\": \"Sababay Ludisia\",\n        \"productPrice\": 260000,\n        \"productImage\": \"uploads/images/bb1aca56-5bef-451a-9eb9-5abad5f32711.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"67a6fa6b-9c09-45bb-97af-98c53360511b\",\n        \"productName\": \"San Marzano Il Pumo Negroamaro Salento\",\n        \"productPrice\": 385000,\n        \"productImage\": \"uploads/images/05b902a8-d32e-4a40-9fa6-f7a4da190c1d.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"885bdde5-ed62-4527-9dbe-4bc32ce0f39f\",\n        \"productName\": \"San Marzano Il Pumo Primitivo Salento\",\n        \"productPrice\": 385000,\n        \"productImage\": \"uploads/images/11e28006-90f1-4325-96a9-a4b61eaa1d42.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"8060956f-18c1-4c82-a2db-c55d531b1837\",\n        \"productName\": \"San Pedro Gato Negro Cabernet Sauvignon \",\n        \"productPrice\": 220000,\n        \"productImage\": \"uploads/images/e674b73f-3037-4492-9615-071ba65c396f.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"b9458d6e-a18e-4fe3-84c5-e158516769c1\",\n        \"productName\": \"San Pedro Gato Negro Carmenere\",\n        \"productPrice\": 220000,\n        \"productImage\": \"uploads/images/8bc4b1b5-fd83-42ad-9900-ad29735449e3.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"02c1a5f6-1817-445a-bf73-78ec728b795d\",\n        \"productName\": \"San Pedro Gato Negro Merlot\",\n        \"productPrice\": 220000,\n        \"productImage\": \"uploads/images/2576ee29-dbc7-4cbf-96df-68fa9cf140a0.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"c315b15a-f4e8-4bd3-bd65-51af35b3c549\",\n        \"productName\": \"Sandeman Fine Ruby\",\n        \"productPrice\": 520000,\n        \"productImage\": \"uploads/images/961fe8f9-768c-4349-b948-9ee743af6c40.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a6ad93a1-1dd6-4b42-a966-183c80b5da2c\",\n        \"productName\": \"Sandeman Fine Tawny\",\n        \"productPrice\": 520000,\n        \"productImage\": \"uploads/images/7d015a08-23dd-4fa6-9d57-6e243a83d5e0.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0e96f130-75de-4d05-8e70-bab5298829a7\",\n        \"productName\": \"Santa Ema Reserva Cabernet Sauvignon \",\n        \"productPrice\": 390000,\n        \"productImage\": \"uploads/images/7ae7b3d4-e904-4886-8899-0048b5f3eac1.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a5951dad-41e2-4024-b35a-b6c092debba8\",\n        \"productName\": \"Sapporo Premium Beer Pint Japan 5% alc 330ml\",\n        \"productPrice\": 60000,\n        \"productImage\": \"uploads/images/e235edde-0ffd-44e4-88af-87f4c08e0af7.png\",\n        \"productCategoryId\": \"i647e112-7699-4696-ad01-cba2fde1f03b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"44e9f0f7-ba97-475a-bbfc-923644e596f3\",\n        \"productName\": \"Sessantanni Primitivo Di Manduria Italy Red Wine\",\n        \"productPrice\": 960000,\n        \"productImage\": \"uploads/images/1792c694-21a3-40ac-aed5-495b31ac3263.webp\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a51019cb-6f6e-45a9-8915-dc758268884c\",\n        \"productName\": \"Singleton Dufftown Distillery 18 Years Old\",\n        \"productPrice\": 2000000,\n        \"productImage\": \"uploads/images/dcc9f8c4-2c46-4577-b026-4e95b3f49296.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"dd18a49a-2721-4656-ad08-cf8025cbef24\",\n        \"productName\": \"Singleton Glen Ord 12 Years Old\",\n        \"productPrice\": 1225000,\n        \"productImage\": \"uploads/images/7e921d7d-b1cf-40fa-a713-494161bdac37.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"19262987-9736-470b-8416-527975014d41\",\n        \"productName\": \"Singleton Glen Ord 15 Years Old\",\n        \"productPrice\": 2200000,\n        \"productImage\": \"uploads/images/642a010d-360e-440a-8bb8-289544e54c70.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"d613115f-c5a8-46e2-aba9-7153ed245696\",\n        \"productName\": \"Singleton Glen Ord 18 Years Old\",\n        \"productPrice\": 3300000,\n        \"productImage\": \"uploads/images/bb3442d3-6056-45ca-8fb4-f04797331682.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"5a4f3fff-cb2a-49dc-bb83-663123753ec4\",\n        \"productName\": \"Skyy Vodka\",\n        \"productPrice\": 320000,\n        \"productImage\": \"uploads/images/77bc4f0d-3401-4dae-9cd2-d30f03074750.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"c0ec4dfd-afa9-48c8-b71a-c6c5338680c0\",\n        \"productName\": \"Smirnoff Red Vodka 200ml\",\n        \"productPrice\": 100000,\n        \"productImage\": \"uploads/images/b61d6338-5d83-419a-b981-4cc823bd7d68.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"b3b79a4f-a1b0-465a-941d-b6bed96a6135\",\n        \"productName\": \"Smirnoff Red Vodka 700ml\",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/daca97ae-b68e-4f3c-bad9-09a21a22843a.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0395c083-54f8-44ee-a3a3-0c316022307a\",\n        \"productName\": \"Southern Comfort Original\",\n        \"productPrice\": 500000,\n        \"productImage\": \"uploads/images/2dc38a5a-7ae5-4b91-bd6d-f585b6b67e60.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"54f2e480-fc6b-4eae-b72c-cb62fb5b2c02\",\n        \"productName\": \"Sterling Vintner's Cabernet Sauvignon USA\",\n        \"productPrice\": 500000,\n        \"productImage\": \"uploads/images/169faa60-c52f-4ff7-b577-d0d7430242ef.webp\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"62b17e8a-d032-4e63-8688-85b907b4f27a\",\n        \"productName\": \"Sterling Vintner's Merlot USA\",\n        \"productPrice\": 500000,\n        \"productImage\": \"uploads/images/76e146b2-b32d-4ab8-9d52-5b42b5469986.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"7b6500bc-6d1f-4a04-aadd-f7a251e8e6c8\",\n        \"productName\": \"Suntory Kakubin Whisky\",\n        \"productPrice\": 1000000,\n        \"productImage\": \"uploads/images/d3cdc719-807a-4860-a6d9-2f96a1bfb2fb.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"10b52787-2135-4545-8901-3f6d168e0a43\",\n        \"productName\": \"Sweet Lab Yinho Regional Lisboa\",\n        \"productPrice\": 330000,\n        \"productImage\": \"uploads/images/78bfcba7-a2ff-4b24-bda8-828dee4421cf.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"41e396e7-231a-4e53-af1a-1d0a6a347034\",\n        \"productName\": \"Talo Primitivo Di Manduria San Marzano\",\n        \"productPrice\": 535000,\n        \"productImage\": \"uploads/images/13746902-629f-4b25-a3b5-3c5a717ecf6c.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"610130ef-1ba7-4a07-a093-56d53975c904\",\n        \"productName\": \"Talo Primitivo Merlot\",\n        \"productPrice\": 420000,\n        \"productImage\": \"uploads/images/f81a85bd-ce31-4a07-b034-10b538b52c03.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"31d89046-cab4-48fe-b35b-d2f69f6e7732\",\n        \"productName\": \"Tequila Rose 500ml\",\n        \"productPrice\": 500000,\n        \"productImage\": \"uploads/images/daabff53-30b6-4baf-979f-82e4eb660414.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"c1504f00-07eb-40b7-bfb7-04ab0a93df14\",\n        \"productName\": \"The Glenlivet 12 \",\n        \"productPrice\": 1400000,\n        \"productImage\": \"uploads/images/d70f9dbb-95b0-4b9b-a9aa-f2d6f4e2e869.jpeg\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"30fd2869-5207-4fdb-be85-23c4225e9698\",\n        \"productName\": \"The Glenlivet 18\",\n        \"productPrice\": 3450000,\n        \"productImage\": \"uploads/images/ede77622-92b9-4ffe-9a57-a6c03ee894ae.png\",\n        \"productCategoryId\": \"fd4294c3-7a05-42af-b445-09c7c9c10eff\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"38a112a7-0e73-468d-81f8-fab98e6d5f51\",\n        \"productName\": \"Two Islands Cabernet Merlot\",\n        \"productPrice\": 280000,\n        \"productImage\": \"uploads/images/7a152bea-6044-46ca-a2bf-bf9665cb0b3a.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"bf43ef11-a32b-4a0e-af48-3001e33545d1\",\n        \"productName\": \"Two Islands Chardonnay \",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/78ac42cb-acd9-4a84-961d-d690e21d7b1f.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"504a598b-048c-4b3b-9407-57d728e9318f\",\n        \"productName\": \"Two Islands Pinot Noir\",\n        \"productPrice\": 335000,\n        \"productImage\": \"uploads/images/f23d5acf-3a06-42f6-bfe8-971ca088c850.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"d1d85538-5d81-4435-b6ee-a7cb1f73a448\",\n        \"productName\": \"Two Islands Sauvignon Blanc\",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/2c0efce1-447d-4e86-aa9d-becf49295d7a.jpeg\",\n        \"productCategoryId\": \"b65a593d-c58e-4e27-84ed-cc1e10f70a45\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"5421e89d-b02d-4a1f-8477-7967d6943235\",\n        \"productName\": \"Two Islands Shiraz\",\n        \"productPrice\": 300000,\n        \"productImage\": \"uploads/images/8411a0b6-cb77-4754-b4a0-ca471abc3118.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"70c3b4f7-0180-4bca-ad49-4a3947a8899f\",\n        \"productName\": \"Two Ocean Cabernet Sauvignon Merlot South Africa\",\n        \"productPrice\": 285000,\n        \"productImage\": \"uploads/images/1440f63d-6e5a-4be1-9893-3563e2674486.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"a95a3f10-34bc-4e05-9707-365057b699e7\",\n        \"productName\": \"Vibe Black Tea Liqueur \",\n        \"productPrice\": 330000,\n        \"productImage\": \"uploads/images/df45ccd7-537a-421e-8ba8-09d1b575ed9a.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"59dd28ba-e50d-429c-b767-0063af3c4b8e\",\n        \"productName\": \"Vibe Lychee Liqueur \",\n        \"productPrice\": 330000,\n        \"productImage\": \"uploads/images/83414df6-8de6-4984-af33-7ca2d86c29bc.jpeg\",\n        \"productCategoryId\": \"j691300-30d4-4a09-bfc0-d783497764ba\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0b80a73b-62ad-4a4c-a3b3-1cbef6eb5385\",\n        \"productName\": \"Vina Ventisquero Reserva Cabernet Sauvignon\",\n        \"productPrice\": 335000,\n        \"productImage\": \"uploads/images/3d7bf926-eb6b-4daf-9d2e-a93aa829386d.png\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"effb1a3e-4009-4445-b901-ec516bb7f768\",\n        \"productName\": \"Yarra Yering Underhill Australia Red Wine\",\n        \"productPrice\": 1500000,\n        \"productImage\": \"uploads/images/2310e50a-8b42-4cb7-aff0-79c9921a1669.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"ce84499c-ca62-4256-9444-2ca24bd38d25\",\n        \"productName\": \"Yomeishu Herbal Tonic Wine Japan 1ltr\",\n        \"productPrice\": 1000000,\n        \"productImage\": \"uploads/images/66c0646d-c93e-469b-8c71-e8a74d57d935.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f5dc7156-6d06-41ac-86d4-121cec119d8a\",\n        \"productName\": \"Yomeishu Herbal Tonic Wine Japan 700ml\",\n        \"productPrice\": 850000,\n        \"productImage\": \"uploads/images/a4a2ceba-329a-43cc-ab26-43b6ea9d6140.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"f7953de6-151f-4d85-bf86-94ce62b0530e\",\n        \"productName\": \"Zolla Primitivo Di Manduria \",\n        \"productPrice\": 550000,\n        \"productImage\": \"uploads/images/32a15e15-5ec1-4875-bd43-bb8515290766.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    },\n    {\n        \"productId\": \"0b4d183d-7cda-41ac-b7c4-36929168531d\",\n        \"productName\": \"Zolla Primitivo Merlot\",\n        \"productPrice\": 445000,\n        \"productImage\": \"uploads/images/0b158d8c-3012-489e-9365-aa259ae8ac17.jpeg\",\n        \"productCategoryId\": \"a3df94f5-9f85-4226-84b0-30265008624b\",\n        \"createdAt\": \"2026-04-20T06:58:52.000Z\",\n        \"updatedAt\": \"2026-04-20T06:58:52.000Z\"\n    }\n]"
+            },
+            {
+              "name": "200 - Success But Empty",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/products",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "merlot",
+                      "disabled": true
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "a3df94f5-9f85-4226-84b0-30265008624b",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "productPrice",
+                      "description": "'productName' | 'productPrice' | 'createdAt'",
+                      "disabled": true
+                    },
+                    {
+                      "key": "order",
+                      "value": "DESC",
+                      "description": "'ASC' | 'DESC'",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "2",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "seed",
+                      "value": null,
+                      "description": "2026-3-20-15",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "166"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"a6-hjkaFXbzsyZlLtilknaEFYn2UE0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 10:03:22 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [],\n    \"pagination\": {\n        \"total\": 0,\n        \"page\": 1,\n        \"limit\": 9,\n        \"lastPage\": 0\n    },\n    \"message\": \"Our wine cellar is currently being updated. No products found matching your criteria.\"\n}"
             },
             {
               "name": "200 - Success Pagination",
@@ -1624,6 +2105,144 @@
               ],
               "cookie": [],
               "body": "{\n    \"message\": \"No token provided, authorization denied\"\n}"
+            },
+            {
+              "name": "404 - The specified category does not exist. Please create the category first.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US,en;q=0.9"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjYWFhZDhjLWExZDEtNDRjZC1iZGEzLTFhOTkzZmQ4MmExNiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE3NzY2NzgyNjYsImV4cCI6MTc3Njc2NDY2Nn0.ZDmZC2CH0LlTpeOY3UUGDGx-nR-s7wuWqih5Yrl978w",
+                    "disabled": true
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://localhost:3000"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://localhost:3000/admin"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?1"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Android\""
+                  },
+                  {
+                    "key": "Cookie",
+                    "value": "g_state={\"i_l\":0,\"i_ll\":1774577684598,\"i_b\":\"DexQQrGgL9+x9yz8sHHBLTvxWJhm9h2EFHon7J2vmu4\",\"i_e\":{\"enable_itp_optimization\":0}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "productName",
+                      "value": "test products",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productPrice",
+                      "value": "23203923",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productCategoryId",
+                      "value": "DUMMY",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productImage",
+                      "type": "file",
+                      "src": "homemade-granola-1200-feature-1.jpg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/products",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "products"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "86"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"56-0B7fG6xY8/Dn/F0O3NL6mXrfGX8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 09:51:10 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"The specified category does not exist. Please create the category first.\"\n}"
             }
           ]
         },
@@ -2000,6 +2619,144 @@
               ],
               "cookie": [],
               "body": "{\n    \"message\": \"No token provided, authorization denied\"\n}"
+            },
+            {
+              "name": "404 - The specified category does not exist. Please create the category first.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US,en;q=0.9"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjYWFhZDhjLWExZDEtNDRjZC1iZGEzLTFhOTkzZmQ4MmExNiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE3NzY2NzgyNjYsImV4cCI6MTc3Njc2NDY2Nn0.ZDmZC2CH0LlTpeOY3UUGDGx-nR-s7wuWqih5Yrl978w",
+                    "disabled": true
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://localhost:3000"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://localhost:3000/admin"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Linux; Android 13; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?1"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Android\""
+                  },
+                  {
+                    "key": "Cookie",
+                    "value": "g_state={\"i_l\":0,\"i_ll\":1774577684598,\"i_b\":\"DexQQrGgL9+x9yz8sHHBLTvxWJhm9h2EFHon7J2vmu4\",\"i_e\":{\"enable_itp_optimization\":0}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "productName",
+                      "value": "testing new product",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productPrice",
+                      "value": "540000",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productCategoryId",
+                      "value": "a3df94f5-9f85-4226-84b0-30265008624b",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productImage",
+                      "value": "https://www.winecartel.id/cdn/shop/files/c0bd9009-afec-48fa-b012-7f1615b49f0d.jpg?v=1735617954",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/products",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "products"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "86"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"56-0B7fG6xY8/Dn/F0O3NL6mXrfGX8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 09:45:07 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"The specified category does not exist. Please create the category first.\"\n}"
             }
           ]
         },
@@ -2518,6 +3275,145 @@
               ],
               "cookie": [],
               "body": "{\n    \"message\": \"Product not found\"\n}"
+            },
+            {
+              "name": "404 - The specified category does not exist. Please create the category first.",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "en-US,en;q=0.9"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjYWFhZDhjLWExZDEtNDRjZC1iZGEzLTFhOTkzZmQ4MmExNiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE3NzY2NzgyNjYsImV4cCI6MTc3Njc2NDY2Nn0.ZDmZC2CH0LlTpeOY3UUGDGx-nR-s7wuWqih5Yrl978w",
+                    "disabled": true
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://localhost:3000"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://localhost:3000/admin"
+                  },
+                  {
+                    "key": "Sec-Fetch-Dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "Sec-Fetch-Mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "Sec-Fetch-Site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?1"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Android\""
+                  },
+                  {
+                    "key": "Cookie",
+                    "value": "g_state={\"i_l\":0,\"i_ll\":1774577684598,\"i_b\":\"DexQQrGgL9+x9yz8sHHBLTvxWJhm9h2EFHon7J2vmu4\",\"i_e\":{\"enable_itp_optimization\":0}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "productName",
+                      "value": "testing new product updatee",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productPrice",
+                      "value": "540000",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productCategoryId",
+                      "value": "DUMMY",
+                      "type": "text"
+                    },
+                    {
+                      "key": "productImage",
+                      "value": "https://www.winecartel.id/cdn/shop/files/c0bd9009-afec-48fa-b012-7f1615b49f0d.jpg?v=1735617954",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/products/ca10b301-3288-4663-b0ba-8c72b934d3ce",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "products",
+                    "ca10b301-3288-4663-b0ba-8c72b934d3ce"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "86"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"56-0B7fG6xY8/Dn/F0O3NL6mXrfGX8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 09:52:32 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"The specified category does not exist. Please create the category first.\"\n}"
             }
           ]
         },
@@ -3418,7 +4314,7 @@
     "bearer": [
       {
         "key": "token",
-        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBjYWFhZDhjLWExZDEtNDRjZC1iZGEzLTFhOTkzZmQ4MmExNiIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE3NzY3NDI0MTUsImV4cCI6MTc3NjgyODgxNX0.ptpQlATgFr1pZZygFCfPjAY8z9L9fP57fAJqyxOstl8",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk4MDQwNTZlLTVmY2MtNGNlNy1hNzNhLWYxNDQ1Yzc2NDYyOSIsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE3NzY3NjM4NjUsImV4cCI6MTc3Njg1MDI2NX0.pWIcrCT1R2lUzq2bW2qp03lx9cYs6Qfpsxeo14iswzg",
         "type": "string"
       }
     ]

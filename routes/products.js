@@ -27,13 +27,13 @@ router.get('/', async (req, res) => {
         whereClauses.push('productCategoryId = ?');
         queryParams.push(categoryId);
     }
-    if (minPrice) {
+    if (minPrice && !isNaN(Number(minPrice))) {
         whereClauses.push('productPrice >= ?');
-        queryParams.push(parseInt(minPrice));
+        queryParams.push(Number(minPrice));
     }
-    if (maxPrice) {
+    if (maxPrice && !isNaN(Number(maxPrice))) {
         whereClauses.push('productPrice <= ?');
-        queryParams.push(parseInt(maxPrice));
+        queryParams.push(Number(maxPrice));
     }
 
     if (whereClauses.length > 0) {
@@ -56,11 +56,14 @@ router.get('/', async (req, res) => {
     }
 
     // Pagination
+    const finalLimit = Number(limit) || 9;
+    const finalOffset = Number(offset) || 0;
+    
     query += ' LIMIT ? OFFSET ?';
     const paginatedParams = [...queryParams, parseInt(limit), parseInt(offset)];
 
     try {
-        const [rows] = await db.execute(query, paginatedParams);
+        const [rows] = await db.query(query, paginatedParams);
         const [countResult] = await db.execute(countQuery, queryParams);
 
         const total = countResult[0].total;
@@ -68,7 +71,7 @@ router.get('/', async (req, res) => {
 
         logger.info(`Products fetched successfully. Total: ${total}, Page: ${page}`);
 
-        res.json({
+        const responseData = {
             data: rows,
             pagination: {
                 total,
@@ -76,10 +79,19 @@ router.get('/', async (req, res) => {
                 limit: parseInt(limit),
                 lastPage
             }
-        });
+        };
+
+        if (rows.length === 0) {
+            responseData.message = "Our wine cellar is currently being updated. No products found matching your criteria.";
+        }
+
+        res.json(responseData);
     } catch (error) {
         logger.error(`Error fetching products: ${error.message}`);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ 
+            message: "We encountered an unexpected error while retrieving our wine collection. Please try again later.",
+            error: error.message 
+        });
     }
 });
 
@@ -121,6 +133,14 @@ router.post('/', verifyToken, upload.single('productImage'), async (req, res) =>
     const productImagePath = req.file ? `uploads/${req.file.filename}` : (req.body.productImage || '');
 
     try {
+        // Validate category existence if provided
+        if (productCategoryId) {
+            const [catCheck] = await db.execute('SELECT * FROM categories WHERE productCategoryId = ?', [productCategoryId]);
+            if (catCheck.length === 0) {
+                return res.status(404).json({ message: 'The specified category does not exist. Please create the category first.' });
+            }
+        }
+
         await db.execute(
             'INSERT INTO products (productId, productName, productPrice, productImage, productCategoryId) VALUES (?, ?, ?, ?, ?)',
             [productId, productName, productPrice, productImagePath, productCategoryId]
@@ -148,6 +168,14 @@ router.put('/:id', verifyToken, upload.single('productImage'), async (req, res) 
         if (rows.length === 0) {
             logger.error(`Update failed: Product not found: ${req.params.id}`);
             return res.status(404).json({ message: 'Product not found' });
+        }
+
+        // Validate category existence if provided
+        if (productCategoryId) {
+            const [catCheck] = await db.execute('SELECT * FROM categories WHERE productCategoryId = ?', [productCategoryId]);
+            if (catCheck.length === 0) {
+                return res.status(404).json({ message: 'The specified category does not exist. Please create the category first.' });
+            }
         }
 
         await db.execute(

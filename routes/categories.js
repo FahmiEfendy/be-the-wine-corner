@@ -12,6 +12,9 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const [rows] = await db.execute('SELECT * FROM categories');
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'No categories found' });
+        }
         logger.info('Categories fetched successfully');
         res.json(rows);
     } catch (error) {
@@ -29,6 +32,20 @@ router.post('/', verifyToken, upload.single('image_path'), async (req, res) => {
     const imagePath = req.file ? `uploads/${req.file.filename}` : (req.body.image_path || '');
 
     try {
+        // Check for existing duplicates
+        const [existing] = await db.execute(
+            'SELECT * FROM categories WHERE productType = ? OR productPath = ?',
+            [productType, productPath]
+        );
+
+        if (existing.length > 0) {
+            const isTypeDup = existing.some(c => c.productType === productType);
+            const msg = isTypeDup 
+                ? `A category with the name "${productType}" already exists.` 
+                : `A category with the path "${productPath}" already exists.`;
+            return res.status(400).json({ message: msg });
+        }
+
         await db.execute(
             'INSERT INTO categories (productCategoryId, productPath, productType, image_path) VALUES (?, ?, ?, ?)',
             [productCategoryId, productPath, productType, imagePath]
@@ -60,6 +77,22 @@ router.patch('/:id', verifyToken, upload.single('image_path'), async (req, res) 
         const updatedPath = productPath || current[0].productPath;
         const updatedType = productType || current[0].productType;
         const updatedImage = imagePath !== undefined ? imagePath : current[0].image_path;
+
+        // Check for duplicates in other categories
+        if (productType || productPath) {
+            const [dups] = await db.execute(
+                'SELECT * FROM categories WHERE (productType = ? OR productPath = ?) AND productCategoryId != ?',
+                [updatedType, updatedPath, req.params.id]
+            );
+
+            if (dups.length > 0) {
+                const isTypeDup = dups.some(c => c.productType === updatedType);
+                const msg = isTypeDup 
+                    ? `Another category already uses the name "${updatedType}".` 
+                    : `Another category already uses the path "${updatedPath}".`;
+                return res.status(400).json({ message: msg });
+            }
+        }
 
         await db.execute(
             'UPDATE categories SET productPath = ?, productType = ?, image_path = ? WHERE productCategoryId = ?',
