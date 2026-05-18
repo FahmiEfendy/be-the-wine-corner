@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const db = require('./config/db');
 const logger = require('./utils/logger');
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
@@ -19,13 +20,37 @@ const PORT = process.env.PORT || 5000;
 initializeDatabase().then(() => {
     // Middleware
     app.use(cors());
-    app.use(morgan(process.env.MORGAN_ENVIRONMENT || 'dev'));
+
+    // Skip logging for health checks / ping endpoints to avoid log pollution in monitoring
+    app.use(morgan(process.env.MORGAN_ENVIRONMENT || 'dev', {
+        skip: (req, res) => req.originalUrl === '/api/health'
+    }));
+
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
     app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
     // Routes
+    app.get('/api/health', async (req, res) => {
+        try {
+            // Check DB connection
+            await db.query('SELECT 1');
+            res.status(200).json({
+                status: 'UP',
+                database: 'connected',
+                timestamp: new Date().toISOString()
+            });
+        } catch (err) {
+            res.status(500).json({
+                status: 'DOWN',
+                database: 'disconnected',
+                error: err.message,
+                timestamp: new Date().toISOString()
+            });
+        }
+    });
+
     app.use('/api/auth', authRoutes);
     app.use('/api/products', productRoutes);
     app.use('/api/categories', categoryRoutes);
