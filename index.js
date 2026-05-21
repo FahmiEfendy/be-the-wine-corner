@@ -23,7 +23,7 @@ initializeDatabase().then(() => {
 
     // Skip logging for health checks / ping endpoints to avoid log pollution in monitoring
     app.use(morgan(process.env.MORGAN_ENVIRONMENT || 'dev', {
-        skip: (req, res) => req.originalUrl === '/api/health'
+        skip: (req, res) => req.originalUrl === '/health'
     }));
 
     app.use(bodyParser.json());
@@ -32,7 +32,7 @@ initializeDatabase().then(() => {
     app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
     // Routes
-    app.get('/api/health', async (req, res) => {
+    app.get('/health', async (req, res) => {
         try {
             // Check DB connection
             await db.query('SELECT 1');
@@ -51,11 +51,11 @@ initializeDatabase().then(() => {
         }
     });
 
-    app.use('/api/auth', authRoutes);
-    app.use('/api/products', productRoutes);
-    app.use('/api/categories', categoryRoutes);
+    app.use('/auth', authRoutes);
+    app.use('/products', productRoutes);
+    app.use('/categories', categoryRoutes);
 
-    app.get('/api', (req, res) => {
+    app.get('/', (req, res) => {
         res.send('Welcome to The Wine Corner API');
     });
 
