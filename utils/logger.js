@@ -21,14 +21,12 @@ const logger = createLogger({
     ],
 });
 
-// If we're not in production then log to the `console` with colors
-if (process.env.NODE_ENV !== 'production') {
-    logger.add(new transports.Console({
-        format: combine(
-            colorize(),
-            logFormat
-        )
-    }));
-}
+// Log to the `console` with colors for all environments
+logger.add(new transports.Console({
+    format: combine(
+        colorize(),
+        logFormat
+    )
+}));
 
 module.exports = logger;
