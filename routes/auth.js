@@ -6,11 +6,12 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../config/db');
 const logger = require('../utils/logger');
 const verifyToken = require('../middleware/auth');
+const { registerValidator, loginValidator } = require('../middleware/validation');
 
 const router = express.Router();
 
 // Register
-router.post('/register', async (req, res) => {
+router.post('/register', registerValidator, async (req, res, next) => {
     const { username, password } = req.body;
     const id = uuidv4();
 
@@ -18,7 +19,7 @@ router.post('/register', async (req, res) => {
         const [existingUser] = await db.execute('SELECT * FROM users WHERE username = ?', [username]);
 
         if (existingUser.length > 0) {
-            logger.error(`Registration failed: Username already exists: ${username}`);
+            logger.warn(`Registration failed: Username already exists: ${username}`);
             return res.status(400).json({ message: 'Username already exists' });
         }
 
@@ -30,13 +31,12 @@ router.post('/register', async (req, res) => {
         logger.info(`User registered successfully: ${username}`);
         res.status(201).json({ message: 'User registered successfully', userId: id });
     } catch (error) {
-        logger.error(`Registration error for user ${username}: ${error.message}`);
-        res.status(500).json({ error: error.message });
+        next(error);
     }
 });
 
 // Login
-router.post('/login', async (req, res) => {
+router.post('/login', loginValidator, async (req, res, next) => {
     const { username, password } = req.body;
 
     try {
@@ -60,19 +60,17 @@ router.post('/login', async (req, res) => {
                     user: { id: user.id, username: user.username }
                 });
             } else {
-                logger.error(`Login failed: Invalid password for user: ${username}`);
+                logger.warn(`Login failed: Invalid password for user: ${username}`);
                 res.status(401).json({ message: 'Invalid credentials' });
             }
         } else {
-            logger.error(`Login failed: No user found for: ${username}`);
-            res.status(401).json({ message: 'No user found' });
+            logger.warn(`Login failed: No user found for: ${username}`);
+            res.status(401).json({ message: 'Invalid credentials' }); // Standardize message to avoid user enumeration
         }
     } catch (error) {
-        logger.error(`Login error for user ${username}: ${error.message}`);
-        res.status(500).json({ error: error.message });
+        next(error);
     }
 });
-
 
 // Verify Token
 router.get('/verify', verifyToken, (req, res) => {

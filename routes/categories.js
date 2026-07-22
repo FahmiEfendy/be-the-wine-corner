@@ -5,11 +5,16 @@ const db = require('../config/db');
 const logger = require('../utils/logger');
 const upload = require('../utils/multer');
 const verifyToken = require('../middleware/auth');
+const { 
+    createCategoryValidator, 
+    updateCategoryValidator, 
+    uuidParamValidator 
+} = require('../middleware/validation');
 
 const router = express.Router();
 
 // Get all categories
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try {
         const [rows] = await db.execute('SELECT * FROM categories');
         if (rows.length === 0) {
@@ -18,13 +23,12 @@ router.get('/', async (req, res) => {
         logger.info('Categories fetched successfully');
         res.json(rows);
     } catch (error) {
-        logger.error(`Error fetching categories: ${error.message}`);
-        res.status(500).json({ error: error.message });
+        next(error);
     }
 });
 
 // Add a category
-router.post('/', verifyToken, upload.single('image_path'), async (req, res) => {
+router.post('/', verifyToken, upload.single('image_path'), createCategoryValidator, async (req, res, next) => {
     const { productPath, productType } = req.body;
     const productCategoryId = uuidv4();
 
@@ -53,13 +57,12 @@ router.post('/', verifyToken, upload.single('image_path'), async (req, res) => {
         logger.info(`Category added successfully: ${productType} (${productCategoryId})`);
         res.status(201).json({ message: 'Category added successfully', productCategoryId });
     } catch (error) {
-        logger.error(`Error adding category: ${error.message}`);
-        res.status(500).json({ error: error.message });
+        next(error);
     }
 });
 
 // Update category (PATCH)
-router.patch('/:id', verifyToken, upload.single('image_path'), async (req, res) => {
+router.patch('/:id', verifyToken, upload.single('image_path'), uuidParamValidator('id'), updateCategoryValidator, async (req, res, next) => {
     const { productPath, productType } = req.body;
     let imagePath = req.body.image_path;
 
@@ -102,8 +105,7 @@ router.patch('/:id', verifyToken, upload.single('image_path'), async (req, res) 
         logger.info(`Category updated successfully: ${req.params.id}`);
         res.json({ message: 'Category updated successfully' });
     } catch (error) {
-        logger.error(`Error updating category ${req.params.id}: ${error.message}`);
-        res.status(500).json({ error: error.message });
+        next(error);
     }
 });
 
