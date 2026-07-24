@@ -27,7 +27,9 @@ initializeDatabase().then(() => {
     app.set('trust proxy', 1);
 
     // Security headers middleware
-    app.use(helmet());
+    app.use(helmet({
+        crossOriginResourcePolicy: { policy: "cross-origin" }
+    }));
 
     // CORS configuration restricting origins
     const allowedOrigins = process.env.ALLOWED_ORIGINS
