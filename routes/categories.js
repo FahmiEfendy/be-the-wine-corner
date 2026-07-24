@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../config/db');
 const logger = require('../utils/logger');
 const upload = require('../utils/multer');
+const { processAndSaveImage } = require('../utils/imageProcessor');
 const verifyToken = require('../middleware/auth');
 const { 
     createCategoryValidator, 
@@ -32,10 +33,12 @@ router.post('/', verifyToken, upload.single('image_path'), createCategoryValidat
     const { productPath, productType } = req.body;
     const productCategoryId = uuidv4();
 
-    // Use uploaded file path or provided URL
-    const imagePath = req.file ? `uploads/${req.file.filename}` : (req.body.image_path || '');
-
     try {
+        // Use uploaded file path or provided URL
+        const imagePath = req.file
+            ? `uploads/${await processAndSaveImage(req.file, 'image_path')}`
+            : (req.body.image_path || '');
+
         // Check for existing duplicates
         const [existing] = await db.execute(
             'SELECT * FROM categories WHERE productType = ? OR productPath = ?',
@@ -64,13 +67,13 @@ router.post('/', verifyToken, upload.single('image_path'), createCategoryValidat
 // Update category (PATCH)
 router.patch('/:id', verifyToken, upload.single('image_path'), uuidParamValidator('id'), updateCategoryValidator, async (req, res, next) => {
     const { productPath, productType } = req.body;
-    let imagePath = req.body.image_path;
-
-    if (req.file) {
-        imagePath = `uploads/${req.file.filename}`;
-    }
 
     try {
+        let imagePath = req.body.image_path;
+        if (req.file) {
+            imagePath = `uploads/${await processAndSaveImage(req.file, 'image_path')}`;
+        }
+
         // Fetch current values to allow partial updates if needed
         const [current] = await db.execute('SELECT * FROM categories WHERE productCategoryId = ?', [req.params.id]);
         if (current.length === 0) {

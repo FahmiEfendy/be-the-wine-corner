@@ -177,7 +177,7 @@ Run through this checklist after every deployment or significant code change.
 
 ---
 
-## 6. Error Handling
+## 6. Error Handling & Validation
 
 - [ ] **Unauthorized request is rejected**
   ```bash
@@ -187,19 +187,73 @@ Run through this checklist after every deployment or significant code change.
   ```
   **Expected:** `401` or `403`
 
-- [ ] **Invalid product ID returns appropriate error**
+- [ ] **Invalid UUID returns 400 validation error**
   ```bash
-  curl -s -o /dev/null -w "%{http_code}" http://api-wine.fahmiefendy.dev/products/nonexistent-id
+  curl -s -o /dev/null -w "%{http_code}" http://api-wine.fahmiefendy.dev/products/not-a-uuid
   ```
-  **Expected:** `404`
+  **Expected:** `400`
 
-- [ ] **Missing required fields return validation error**
+- [ ] **Missing required product fields return validation error**
+  ```bash
+  curl -s -X POST http://api-wine.fahmiefendy.dev/products \
+    -H "Authorization: Bearer <JWT_TOKEN>" \
+    -H "Content-Type: application/json" \
+    -d '{}' | jq .
+  ```
+  **Expected:** `400` with `errors` array
+
+- [ ] **Missing required auth fields return validation error**
   ```bash
   curl -s -o /dev/null -w "%{http_code}" -X POST http://api-wine.fahmiefendy.dev/auth/register \
     -H "Content-Type: application/json" \
     -d '{}'
   ```
   **Expected:** `400`
+
+- [ ] **Invalid click type is rejected**
+  ```bash
+  curl -s -o /dev/null -w "%{http_code}" -X PATCH \
+    http://api-wine.fahmiefendy.dev/products/<PRODUCT_ID>/click/invalid-type
+  ```
+  **Expected:** `400`
+
+- [ ] **Rate limit is enforced on auth endpoints** — Send 16+ requests rapidly
+  ```bash
+  for i in $(seq 1 16); do
+    curl -s -o /dev/null -w "%{http_code} " -X POST http://api-wine.fahmiefendy.dev/auth/login \
+      -H "Content-Type: application/json" \
+      -d '{"username":"x","password":"y"}';
+  done
+  ```
+  **Expected:** Last response(s) return `429`
+
+---
+
+## 7. Image Optimization
+
+- [ ] **Original image is served correctly**
+  ```bash
+  curl -s -o /dev/null -w "%{http_code}" http://api-wine.fahmiefendy.dev/uploads/<image-filename>
+  ```
+  **Expected:** `200`
+
+- [ ] **Resized image served with width parameter**
+  ```bash
+  curl -s -o /dev/null -w "%{http_code}" "http://api-wine.fahmiefendy.dev/uploads/<image-filename>?w=300"
+  ```
+  **Expected:** `200` with image content smaller than original
+
+- [ ] **Cache-Control header present on resized image**
+  ```bash
+  curl -s -I "http://api-wine.fahmiefendy.dev/uploads/<image-filename>?w=300" | grep -i cache-control
+  ```
+  **Expected:** `Cache-Control: public, max-age=31536000, immutable`
+
+- [ ] **Oversized dimension request is capped**
+  ```bash
+  curl -s -o /dev/null -w "%{http_code}" "http://api-wine.fahmiefendy.dev/uploads/<image-filename>?w=999999"
+  ```
+  **Expected:** `200` (capped to 2000px, no error)
 
 ---
 

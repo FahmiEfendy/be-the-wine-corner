@@ -1,5 +1,7 @@
 const cors = require('cors');
+const fs = require('fs');
 const path = require('path');
+const sharp = require('sharp');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const express = require('express');
@@ -51,6 +53,77 @@ initializeDatabase().then(() => {
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+
+    // Image resizing and optimization middleware for uploads
+    app.get('/uploads/:filename', async (req, res, next) => {
+        const { filename } = req.params;
+        const { w, h } = req.query;
+
+        const filePath = path.join(__dirname, 'uploads', filename);
+
+        // If file doesn't exist locally, hand over to static or next middleware
+        if (!fs.existsSync(filePath)) {
+            return next();
+        }
+
+        // Check if it's an image
+        const ext = path.extname(filename).toLowerCase();
+        const isImage = ['.webp', '.jpg', '.jpeg', '.png', '.gif'].includes(ext);
+
+        if ((!w && !h) || !isImage) {
+            return res.sendFile(filePath);
+        }
+
+        try {
+            const MAX_DIM = 2000;
+            const width = w ? Math.min(parseInt(w, 10), MAX_DIM) : null;
+            const height = h ? Math.min(parseInt(h, 10), MAX_DIM) : null;
+
+            if ((w && isNaN(width)) || (h && isNaN(height))) {
+                return res.sendFile(filePath);
+            }
+
+            // Cache lives outside uploads/ to prevent it being served by the static middleware
+            const cacheDir = path.join(__dirname, 'image_cache');
+            if (!fs.existsSync(cacheDir)) {
+                fs.mkdirSync(cacheDir, { recursive: true });
+            }
+
+            // Generate cache filename: filename_wX_hY.ext
+            const cacheFilename = `${path.basename(filename, ext)}_${width || 'auto'}x${height || 'auto'}${ext}`;
+            const cacheFilePath = path.join(cacheDir, cacheFilename);
+
+            if (fs.existsSync(cacheFilePath)) {
+                res.set('Cache-Control', 'public, max-age=31536000, immutable');
+                return res.sendFile(cacheFilePath);
+            }
+
+            // Perform resize
+            let transform = sharp(filePath);
+            transform = transform.resize({
+                width: width || undefined,
+                height: height || undefined,
+                fit: 'inside',
+                withoutEnlargement: true
+            });
+
+            // Set quality/format
+            if (ext === '.webp') {
+                transform = transform.webp({ quality: 80 });
+            } else if (ext === '.jpg' || ext === '.jpeg') {
+                transform = transform.jpeg({ quality: 80 });
+            } else if (ext === '.png') {
+                transform = transform.png({ quality: 80 });
+            }
+
+            await transform.toFile(cacheFilePath);
+            res.set('Cache-Control', 'public, max-age=31536000, immutable');
+            return res.sendFile(cacheFilePath);
+        } catch (err) {
+            logger.error(`Image resize failed for ${filename}: ${err.message}`);
+            return res.sendFile(filePath);
+        }
+    });
 
     app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

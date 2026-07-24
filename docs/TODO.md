@@ -5,8 +5,8 @@
 
 ## 🟡 Medium
 
+- [ ] **Health check structured response** — The centralized error handler changes the shape of the `/health` failure response. Restore `{ status, database, error, timestamp }` for monitoring compatibility
 - [ ] **API versioning** — Prefix routes with `/v1/` for future backward compatibility
-- [ ] **Image optimization** — Resize/compress uploaded images with `sharp` before storing
 - [ ] **Soft deletes** — Add `deletedAt` column instead of hard deleting records
 - [ ] **Request ID tracing** — Add unique request IDs to logs for debugging
 - [ ] **Database migrations** — Replace `init-db.js` with a proper migration tool (e.g., `knex` migrations)
@@ -15,6 +15,8 @@
 
 ## 🟢 Nice to Have
 
+- [ ] **Image cache eviction** — Implement a strategy to clear `image_cache/` entries for deleted/replaced products
+- [ ] **OG image for OpenGraph** — Place a static `og-image.png` in the frontend `public/` directory and update `VITE_OG_IMAGE` build arg in GitHub Actions
 - [ ] **API documentation** — Generate OpenAPI/Swagger docs from route definitions
 - [ ] **Product analytics** — Track click analytics (WhatsApp, Blibli, Tokopedia) with proper event logging
 - [ ] **Caching** — Add Redis caching for frequently read product/category data

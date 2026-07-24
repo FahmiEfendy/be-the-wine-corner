@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../config/db');
 const logger = require('../utils/logger');
 const upload = require('../utils/multer');
+const { processAndSaveImage } = require('../utils/imageProcessor');
 const verifyToken = require('../middleware/auth');
 const {
     productValidator,
@@ -129,10 +130,12 @@ router.post('/', verifyToken, upload.single('productImage'), productValidator, a
     const { productName, productPrice, productCategoryId } = req.body;
     const productId = uuidv4();
 
-    // Use uploaded file path or provided URL
-    const productImagePath = req.file ? `uploads/${req.file.filename}` : (req.body.productImage || '');
-
     try {
+        // Use uploaded file path or provided URL
+        const productImagePath = req.file
+            ? `uploads/${await processAndSaveImage(req.file, 'productImage')}`
+            : (req.body.productImage || '');
+
         // Validate category existence if provided
         if (productCategoryId) {
             const [catCheck] = await db.execute('SELECT * FROM categories WHERE productCategoryId = ?', [productCategoryId]);
@@ -153,16 +156,16 @@ router.post('/', verifyToken, upload.single('productImage'), productValidator, a
 });
 
 // Update product
-router.put('/:id', verifyToken, upload.single('productImage'), uuidParamValidator('id'), productValidator, async (req, res, next) => {
+router.put('/:id', verifyToken, uuidParamValidator('id'), upload.single('productImage'), productValidator, async (req, res, next) => {
     const { productName, productPrice, productCategoryId } = req.body;
 
-    // Keep old image or use new one
-    let productImagePath = req.body.productImage;
-    if (req.file) {
-        productImagePath = `uploads/${req.file.filename}`;
-    }
-
     try {
+        // Keep old image or use new one
+        let productImagePath = req.body.productImage;
+        if (req.file) {
+            productImagePath = `uploads/${await processAndSaveImage(req.file, 'productImage')}`;
+        }
+
         const [rows] = await db.execute('SELECT productId FROM products WHERE productId = ?', [req.params.id]);
         if (rows.length === 0) {
             logger.error(`Update failed: Product not found: ${req.params.id}`);
@@ -224,7 +227,14 @@ router.patch('/:id/view', uuidParamValidator('id'), async (req, res, next) => {
 // Increment click counts for marketplace/whatsapp
 router.patch('/:id/click/:type', uuidParamValidator('id'), clickTypeParamValidator, async (req, res, next) => {
     const { type } = req.params;
-    const columnName = `${type}_clicks`;
+
+    // Static map eliminates template-literal SQL to avoid any future injection risk
+    const CLICK_COLUMN_MAP = {
+        whatsapp: 'whatsapp_clicks',
+        blibli: 'blibli_clicks',
+        tokopedia: 'tokopedia_clicks',
+    };
+    const columnName = CLICK_COLUMN_MAP[type];
 
     try {
         const [rows] = await db.execute('SELECT productId FROM products WHERE productId = ?', [req.params.id]);
