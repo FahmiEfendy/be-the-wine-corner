@@ -17,7 +17,13 @@ const router = express.Router();
 // Get all categories
 router.get('/', async (req, res, next) => {
     try {
-        const [rows] = await db.execute('SELECT * FROM categories');
+        const [rows] = await db.execute(`
+            SELECT c.*, COUNT(p.productId) AS productCount
+            FROM categories c
+            LEFT JOIN products p ON p.productCategoryId = c.productCategoryId
+            GROUP BY c.productCategoryId
+            ORDER BY productCount DESC, c.productType ASC
+        `);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'No categories found' });
         }
