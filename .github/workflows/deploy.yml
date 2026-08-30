@@ -1,11 +1,15 @@
 name: Deploy Production
-run-name: "Deploy Production — branch ${{ inputs.ref != '' && inputs.ref || github.ref_name }}"
+run-name: "Deploy Production — branch ${{ inputs.ref != '' && inputs.ref || github.ref_name }}${{ inputs.title != '' && format(' | {0}', inputs.title) || '' }}"
 
 on:
   workflow_dispatch:
     inputs:
       ref:
         description: 'Override: commit SHA (or branch/tag) to deploy instead of the branch selected above — leave empty to just deploy that branch'
+        required: false
+        default: ''
+      title:
+        description: 'Optional label for this run (e.g. "Add product category") — shown in the run name'
         required: false
         default: ''
 
